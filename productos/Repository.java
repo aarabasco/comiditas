@@ -11,4 +11,11 @@ public class Repository {
 		}
 		return products;
 	}
+	public Product[] gelAllProducts(){
+		Product[] allProducts=new Product[products.size()];
+		for(int i=0;i<=products.size();i++){
+			allProducts[i]=products.get(i);
+		}
+		return allProducts;
+	}
 }
