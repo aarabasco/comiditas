@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class ProductRepository{
-	private List<Product> products=new ArrayList<Product>();
+	private List<Product> products;
 	private static ProductRepository productRepository;
 	
 	private ProductRepository(){
+		products=new ArrayList<Product>();
 	}
 
 	public static ProductRepository instance(){
