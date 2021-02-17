@@ -61,6 +61,9 @@ public class RepositoryOrders {
 		for(int i=0;i<orders.size();i++) {
 			if(orders.get(i)!=null&&orders.get(i).getDatetime()!=null) {
 				if(orders.get(i).getDatetime().compareTo(ini)<0&&orders.get(i).getDatetime().compareTo(end)>0) {
+					if(result==null) {
+						result=new ArrayList<>();
+					}
 					result.add(orders.get(i));
 				}
 				
