@@ -7,27 +7,32 @@ import java.util.List;
 import models.Order;
 //seguira el modelo Singleton
 public class RepositoryOrders {
-	List<Order> orders;
+	ArrayList<Order> orders;
 	
 	//private static variable
 	private static RepositoryOrders instanceO;
 	
 	//constructor private
-	private RepositoryOrders(List<Order> orders) {
+	private RepositoryOrders(ArrayList<Order> orders) {
 		super();
 		this.orders = orders;
 	}
+	
+	private RepositoryOrders() {
+		super();
+		this.orders = new ArrayList<Order>();
+	}
 
-	public List<Order> getOrders() {
+	public ArrayList<Order> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<Order> orders) {
+	public void setOrders(ArrayList<Order> orders) {
 		this.orders = orders;
 	}
 	
 	//getter personalizado
-	public static RepositoryOrders getInstance_O(List<Order> orders) {
+	public static RepositoryOrders getInstance_O(ArrayList<Order> orders) {
 		if(instanceO==null) {
 			instanceO=new RepositoryOrders(orders);
 		}
@@ -35,7 +40,15 @@ public class RepositoryOrders {
 		return instanceO;
 	}	
 	
-	public List<Order> getAllOrder(){
+	public static RepositoryOrders getInstance_O() {
+		if(instanceO==null) {
+			instanceO=new RepositoryOrders();
+		}
+		
+		return instanceO;
+	}	
+	
+	public ArrayList<Order> getAllOrder(){
 		return orders;
 		
 	}
@@ -55,19 +68,11 @@ public class RepositoryOrders {
 		return result;
 	}
 	
-	public List<Order> getOrderByDate(LocalDateTime ini, LocalDateTime end){
-		List<Order> result=null;
+	public ArrayList<Order> getOrderByDate(LocalDateTime ini, LocalDateTime end){
+		ArrayList<Order> result=null;
 	
 		for(int i=0;i<orders.size();i++) {
 			if(orders.get(i)!=null&&orders.get(i).getDatetime()!=null) {
-				if(orders.get(i).getDatetime().compareTo(ini)<0&&orders.get(i).getDatetime().compareTo(end)>0) {
-					if(result==null) {
-						result=new ArrayList<>();
-					}
-					result.add(orders.get(i));
-				}
-				
-				//una u otra
 				
 				if(orders.get(i).getDatetime().isAfter(ini)&&orders.get(i).getDatetime().isBefore(end)) {
 					result.add(orders.get(i));
@@ -77,8 +82,8 @@ public class RepositoryOrders {
 		return result;
 	}
 	
-	public List<Order> getOrdersNoDelivered(){
-		List<Order> result=null;
+	public ArrayList<Order> getOrdersNoDelivered(){
+		ArrayList<Order> result=null;
 	
 		for(int i=0;i<orders.size();i++) {
 			if(orders.get(i)!=null&&!(orders.get(i).isDelivered())) {
@@ -91,8 +96,8 @@ public class RepositoryOrders {
 		return result;
 	}
 	
-	public List<Order> getOrdersNoPayed(){
-		List<Order> result=null;
+	public ArrayList<Order> getOrdersNoPayed(){
+		ArrayList<Order> result=null;
 	
 		for(int i=0;i<orders.size();i++) {
 			if(orders.get(i)!=null&&!(orders.get(i).isPayed())) {
