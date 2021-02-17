@@ -1,21 +1,36 @@
 package productos;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class Repository {
-	private static ArrayList<Product> products;
+	private List<Product> products=new ArrayList<Product>();
+	private static Repository productRepository;
 	
-	public static ArrayList<Product> instance(){
-		if(products==null){
-			products=new ArrayList<Product>();
-		}
-		return products;
+	private Repository(){
 	}
-	public Product[] gelAllProducts(){
-		Product[] allProducts=new Product[products.size()];
-		for(int i=0;i<=products.size();i++){
-			allProducts[i]=products.get(i);
+
+	public static Repository instance(){
+		if(productRepository==null){
+			productRepository=new Repository();
 		}
-		return allProducts;
+		return productRepository;
+	}
+
+	public void addProduct(Product product){
+		products.add(product);
+	}
+	//			Devuelve solo una línea por alguna razón
+//	public Product[] gelAllProducts(){
+//		Product[] allProducts=new Product[products.size()];
+//		for(int i=0;i<products.size();i++){
+//			allProducts[i]=products.get(i);
+//		}
+//		return allProducts;
+//	}
+	public void gelAllProducts(){
+		for(int i=0;i<products.size();i++){
+			System.out.println(products.get(i));
+		}
 	}
 }
