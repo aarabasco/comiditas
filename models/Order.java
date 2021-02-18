@@ -1,5 +1,6 @@
 package models;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ import models.*;
 public class Order {
 	private UUID id;
 	private Client cliente;
-	private List<Product> productos;
+	private ArrayList<Product> productos;
 	private double total;
 	private LocalDateTime datetime;
 	private String adress;
@@ -30,7 +31,7 @@ public class Order {
 	 * @param delivered
 	 * @param payed
 	 */
-	public Order(Client cliente, List<Product> productos, double total, LocalDateTime datetime, String adress, boolean delivered,
+	public Order(Client cliente, ArrayList<Product> productos, double total, LocalDateTime datetime, String adress, boolean delivered,
 			boolean payed) {
 		super();
 		this.id=UUID.randomUUID();
@@ -59,7 +60,7 @@ public class Order {
 		return productos;
 	}
 
-	public void setProductos(List<Product> productos) {
+	public void setProductos(ArrayList<Product> productos) {
 		this.productos = productos;
 	}
 
