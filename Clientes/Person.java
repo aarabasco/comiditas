@@ -49,5 +49,10 @@ public class Person {
 		} else if (!dni.equals(other.dni))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "[name=" + name + ", dni=" + dni + ", age=" + age+",";
 	}	
 }
