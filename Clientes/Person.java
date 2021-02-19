@@ -1,13 +1,13 @@
 package Clientes;
 public class Person {
 	private String name; 
-	private int dni;
+	private String dni;
 	private int age;
 	
-	public Person (String name, int dni, int age) {
-		this.setName(name);
-		this.setDni(dni);
-		this.setAge(age);
+	public Person (String name, String dni, int age) {
+		this.name=name;
+		this.dni=dni;
+		this.age=age;
 	}
 	
 	public String getName() {
@@ -18,11 +18,11 @@ public class Person {
 		this.name = name;
 	}
 
-	public int getDni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 
@@ -33,4 +33,21 @@ public class Person {
 	public void setAge(int age) {
 		this.age = age;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		if (dni == null) {
+			if (other.dni != null)
+				return false;
+		} else if (!dni.equals(other.dni))
+			return false;
+		return true;
+	}	
 }
