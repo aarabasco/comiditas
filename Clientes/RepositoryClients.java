@@ -1,4 +1,5 @@
 package Clientes;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RepositoryClients {
@@ -18,7 +19,21 @@ public class RepositoryClients {
 		 return mirepository;
 	 }
 
-	public List<Client> getclients() {
+	public List<Client> getclients(String nombre) {
+		ArrayList <Client> result=null;
+		if(nombre != null) {
+			for(int i=0;i<clients.size();i++) {
+				
+				if(clients.get(i).getName()!=null) {
+					if(clients.get(i).getName().equals(nombre)) {
+						if(result==null) {
+							result=new ArrayList<>();
+						}
+						result.add(clients.get(i));
+					}
+				}
+			}
+		}
 		return clients;
 	 }
 	 
@@ -27,7 +42,10 @@ public class RepositoryClients {
 	 }
 	
 	public List<Client> getAllClients(){
-		return clients;
+		if(clients != null) {
+			return clients;
+		}
+		return null;
 	}
 	
 	public List<Client> searchClientsName(){
@@ -35,6 +53,7 @@ public class RepositoryClients {
 	}
 	
 	public List<Client> updateClients(){
+		
 		return clients;
 	}
 	
@@ -43,9 +62,20 @@ public class RepositoryClients {
 		return clients;
 	}
 	
-	public List<Client> deleteClients(){
-		clients.remove(0);
-		return clients;
+	public boolean deleteClients(String dni){
+		boolean result = false;
+			if (dni != null) {
+				for(int i=0;i<clients.size();i++) {
+					if(clients.get(i).getName()!=null) {
+						if(clients.get(i).getName().equals(dni)) {
+							clients.remove(i);
+							return true;
+						}
+					}
+				}
+			}
+		return result;
+		
 	}
 	
 	public List<Client> searchClientsDNI(){
