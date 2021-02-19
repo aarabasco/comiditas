@@ -19,28 +19,38 @@ public class ProductRepository{
 	}
 
 	public void addProduct(Product product){
-		products.add(product);
+		if(product!=null&&!products.contains(product)){
+			products.add(product);
+		}
 	}
 	public void removeProduct(Product product){
-		products.remove(product);
-	}
-	public void gelAllProducts(){
-		for(int i=0;i<products.size();i++){
-			System.out.println(products.get(i));
+		if(product!=null&&products.contains(product)){
+			products.remove(product);
 		}
 	}
-	public void gelAllDrinks(){
+	public List<Product> getAllProducts(){
+		List<Product> allProducts=new ArrayList<Product>();
+		for(int i=0;i<products.size();i++){
+			allProducts.add(products.get(i));
+		}
+		return allProducts;
+	}
+	public List<Product> getAllDrinks(){
+		List<Product> allDrinks=new ArrayList<Product>();
 		for(int i=0;i<products.size();i++){
 			if(products.get(i) instanceof Drink){
-				System.out.println(products.get(i));
+				allDrinks.add(products.get(i));
 			}
 		}
+		return allDrinks;
 	}
-	public void gelAllFoods(){
+	public List<Product> getAllFoods(){
+		List<Product> allFoods=new ArrayList<Product>();
 		for(int i=0;i<products.size();i++){
 			if(products.get(i) instanceof Food){
-				System.out.println(products.get(i));
+				allFoods.add(products.get(i));
 			}
 		}
+		return allFoods;
 	}
 }
