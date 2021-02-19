@@ -16,4 +16,7 @@ public class Food extends Product{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public String toString() {
+		return super.toString()+" Food [forVegans=" + forVegans + "]";
+	}
 }
