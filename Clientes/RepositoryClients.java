@@ -1,30 +1,28 @@
 package Clientes;
 import java.util.ArrayList;
-import java.util.List;
-
 public class RepositoryClients {
-	 private List<Client> clients;
+	 private ArrayList<Client> clients;
 	 
 	 private static RepositoryClients mirepository; 
 	 
-	 private RepositoryClients(List<Client> clients){
+	 private RepositoryClients(ArrayList<Client> clients){
 		 this.clients=clients; 
 	 }
 	 
 	 
-	 public  static RepositoryClients getMiRepository(List<Client> clients) {
+	 public  static RepositoryClients getMiRepository(ArrayList<Client> clients) {
 		 if (mirepository==null) {
 			 mirepository=new RepositoryClients(clients);
 		 }
 		 return mirepository;
 	 }
 
-	public List<Client> getclients(String nombre) {
+	public ArrayList<Client> getClientsByName(String nombre) {
 		ArrayList <Client> result=null;
 		if(nombre != null) {
 			for(int i=0;i<clients.size();i++) {
 				
-				if(clients.get(i).getName()!=null) {
+				if(clients.get(i)!=null&&clients.get(i).getName()!=null) {
 					if(clients.get(i).getName().equals(nombre)) {
 						if(result==null) {
 							result=new ArrayList<>();
@@ -37,36 +35,47 @@ public class RepositoryClients {
 		return clients;
 	 }
 	 
-	public void setclients(List<Client> clients) {
+	public void setclients(ArrayList<Client> clients) {
 		this.clients = clients;
 	 }
 	
-	public List<Client> getAllClients(){
+	public ArrayList<Client> getAllClients(){
 		if(clients != null) {
 			return clients;
 		}
 		return null;
 	}
 	
-	public List<Client> searchClientsName(){
+	public ArrayList<Client> searchClientsName(){
 		return clients;
 	}
 	
-	public List<Client> updateClients(){
+	public boolean updateClient(Client newCliente) {
 		
-		return clients;
+		if(newCliente!=null&&newCliente.getDni()!=null) {
+			for (int i = 0; i < clients.size(); i++) {
+				if(clients.get(i)!=null&&clients.get(i).getDni()!=null&&clients.get(i).equals(newCliente)) {
+					clients.add(i, newCliente);
+					clients.remove(i+1);
+					return true;
+					
+				}
+			}
+		}
+		
+		return false;
 	}
 	
-	public List<Client> addClients(){
-		clients.add(null);
-		return clients;
+	public boolean addClient(Client newCliente){
+		
+		
+		return false;
 	}
 	
-	public boolean deleteClients(String dni){
-		boolean result = false;
+	public boolean deleteClient(String dni){
 			if (dni != null) {
 				for(int i=0;i<clients.size();i++) {
-					if(clients.get(i).getName()!=null) {
+					if(clients.get(i)!=null&&clients.get(i).getName()!=null) {
 						if(clients.get(i).getName().equals(dni)) {
 							clients.remove(i);
 							return true;
@@ -74,11 +83,11 @@ public class RepositoryClients {
 					}
 				}
 			}
-		return result;
+		return false;
 		
 	}
 	
-	public List<Client> searchClientsDNI(){
+	public ArrayList<Client> searchClientsDNI(){
 		return clients;
 	}
 }
