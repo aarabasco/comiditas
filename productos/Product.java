@@ -24,4 +24,7 @@ public abstract class Product implements IProducto {
 	public boolean getIsForCeliac() {
 		return this.forCeliac;
 	}
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", forCeliac=" + forCeliac + "]";
+	}
 }
