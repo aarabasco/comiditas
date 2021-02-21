@@ -67,8 +67,16 @@ public class RepositoryClients {
 	}
 	
 	public boolean addClient(Client newCliente){
-		
-		
+		if (newCliente != null) {
+			for(int i=0;i<clients.size();i++) {
+				if(clients.get(i)!=null&&clients.get(i).getName()!=null) {
+					if(clients.get(i).getName().equals(newCliente)) {
+						clients.add(i);
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 	
