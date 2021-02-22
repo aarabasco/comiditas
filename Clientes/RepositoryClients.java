@@ -68,16 +68,12 @@ public class RepositoryClients {
 	
 	public boolean addClient(Client newCliente){
 		if (newCliente != null) {
-			for(int i=0;i<clients.size();i++) {
-				if(clients.get(i)!=null&&clients.get(i).getName()!=null) {
-					if(clients.get(i).equals(newCliente)) {
-						return false;
-					}
-				}
+			if(!(clients.contains(newCliente))) {
+				clients.add(newCliente);
+				return true;
 			}
 		}
-		clients.add(newCliente);
-		return true;
+		return false;
 	}
 	
 	public boolean deleteClient(String dni){
