@@ -70,14 +70,14 @@ public class RepositoryClients {
 		if (newCliente != null) {
 			for(int i=0;i<clients.size();i++) {
 				if(clients.get(i)!=null&&clients.get(i).getName()!=null) {
-					if(clients.get(i).getName().equals(newCliente)) {
-						clients.add(i);
-						return true;
+					if(clients.get(i).equals(newCliente)) {
+						return false;
 					}
 				}
 			}
 		}
-		return false;
+		clients.add(newCliente);
+		return true;
 	}
 	
 	public boolean deleteClient(String dni){
