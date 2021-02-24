@@ -1,7 +1,7 @@
 package productos;
 
 public class Drink extends Product{
-	private boolean alcoholic;	
+	private boolean alcoholic;
 	
 	public Drink(String name, Double price, boolean forCeliac, boolean alcoholic) {
 		super(name, price, forCeliac);
