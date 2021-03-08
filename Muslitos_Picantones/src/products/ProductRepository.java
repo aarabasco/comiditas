@@ -105,7 +105,6 @@ public class ProductRepository implements Serializable{
 	}
 	public List<Product> getBundleProducts(Product prod){
 		List<Product> bundleProducts=new ArrayList<Product>();
-		Integer[] bundledProducts=prod.getBundlePack();
 		for(Product p:products) {
 			if(p!=null&&p.getBundlePack()!=null&&p.getBundlePack().length>0) {
 				bundleProducts.add(p);
