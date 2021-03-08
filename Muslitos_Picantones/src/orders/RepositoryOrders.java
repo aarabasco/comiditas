@@ -11,21 +11,12 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import orders.Order;
 import products.Product;
 //seguira el modelo Singleton
 
-@XmlRootElement(name = "repository_orders")
-@XmlAccessorType (XmlAccessType.FIELD)
 public class RepositoryOrders implements Serializable{
-	@XmlElementWrapper(name = "orders")
-	@XmlElement(name="order" )
+
 	ArrayList<Order> orders;
 	
 	//private static variable
