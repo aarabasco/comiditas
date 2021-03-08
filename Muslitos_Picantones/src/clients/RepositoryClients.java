@@ -1,7 +1,15 @@
 package clients;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import clients.Client;
+import orders.Order;
 public class RepositoryClients implements Serializable{
 	 private ArrayList<Client> clients;
 	 
@@ -103,5 +111,36 @@ public class RepositoryClients implements Serializable{
 	public ArrayList<Client> searchClientsDNI(String dni) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void loadFile() {
+		try {
+			FileInputStream fi=new FileInputStream("Client.dat");
+			ObjectInputStream oi=new ObjectInputStream(fi);
+
+			clients=(ArrayList<Client>)oi.readObject();
+			System.out.println(clients);
+			oi.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("No se han encontrado Client.dat");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void safeFile() {
+		try {
+			FileOutputStream fo=new FileOutputStream(new File("Client.dat"));
+			ObjectOutputStream oo=new ObjectOutputStream(fo);
+			oo.writeObject(clients);
+			oo.flush();
+			oo.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("No se ha encontrado Client.dat");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

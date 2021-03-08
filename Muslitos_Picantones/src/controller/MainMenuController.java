@@ -22,13 +22,13 @@ public class MainMenuController implements IMainMenuController{
 		RepositoryOrders ro=RepositoryOrders.getInstance_O();
 		RepositoryClients rc=RepositoryClients.getMiRepository(null);
 		rp.loadFile();
-		System.out.println(rp.getAllProducts());
-		//mmc.newOrder();
+		ro.loadFile();
+		rc
 		
-		U.p("Cargo la info...\n");
+		
+		
 		
 		//ro.saveFile();
-		ro.loadFile();
 		ArrayList<Order>o_prueba=ro.getAllOrder();
 		for (Order o:o_prueba) {
 			U.P(o_prueba.toString());
