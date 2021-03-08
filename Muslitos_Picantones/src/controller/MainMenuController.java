@@ -20,19 +20,52 @@ public class MainMenuController implements IMainMenuController{
 		MainMenuController mmc=new MainMenuController();
 		ProductRepository rp=ProductRepository.instance();
 		RepositoryOrders ro=RepositoryOrders.getInstance_O();
-		RepositoryClients rc=RepositoryClients.getMiRepository(null);
+		RepositoryClients rc=RepositoryClients.getMiRepository();
+		
 		rp.loadFile();
 		ro.loadFile();
-		rc
+		rc.loadFile();
+		
+		U.P("¡Bienvenido a la aplicación de Muslitos_Picantes!\n");
+			int option=-1;
+		do {
+			option=uv.MainOrderMenu();
+			
+			switch(option) {
+			case 1:
+				mmc.newOrder();
+				break;
+			
+			case 2:
+				
+				break;
+			
+			case 3:
+				break;
+			
+			case 4:
+				U.P("\nEl total recaudado es de "+ro.getAllInput()+" Euros.");
+				break;
+				
+			case 5:
+				if(ro.getOrdersNoPayed()!=null&&ro.getOrdersNoPayed().size()>0) {
+					for(Order o: ro.getOrdersNoPayed()) {
+						U.P(o.toString()+"\n");
+					}
+				}
+				
+				else {
+					U.P("\nNo hay ordenes que mostrar.");
+				}
+				
+				break;
+				
+			default:
+				break;
+			}
+		}while(option>0);
 		
 		
-		
-		
-		//ro.saveFile();
-		ArrayList<Order>o_prueba=ro.getAllOrder();
-		for (Order o:o_prueba) {
-			U.P(o_prueba.toString());
-		}
 	}
 	
 	
