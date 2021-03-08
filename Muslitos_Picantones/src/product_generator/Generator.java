@@ -76,8 +76,8 @@ public class Generator {
 			if(option==1) {
 				vegan=true;
 			}
-			
-			result=new Food(name, price, forCeliac, vegan,bundlePack);
+			Integer[]bundlePackA=(Integer[]) bundlePack.toArray();
+			result=new Food(name, price, forCeliac, vegan,bundlePackA);
 		}
 		
 		
@@ -90,7 +90,8 @@ public class Generator {
 				alcoholic=true;
 			}
 			
-			result=new Drink(name, price, forCeliac, alcoholic,bundlePack);
+			Integer[]bundlePackA=(Integer[]) bundlePack.toArray();
+			result=new Drink(name, price, forCeliac, alcoholic,bundlePackA);
 		}
 		
 		System.out.println(result.toString());
