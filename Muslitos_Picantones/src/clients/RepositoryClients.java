@@ -18,6 +18,13 @@ public class RepositoryClients implements Serializable{
 		 }
 		 return mirepository;
 	 }
+	 
+	 public  static RepositoryClients getMiRepository() {
+		 if (mirepository==null) {
+			 mirepository=new RepositoryClients(new ArrayList<Client>());
+		 }
+		 return mirepository;
+	 }
 
 	public ArrayList<Client> getClientsByName(String nombre) {
 		ArrayList <Client> result=null;

@@ -20,7 +20,7 @@ public class MainMenuController implements IMainMenuController{
 		MainMenuController mmc=new MainMenuController();
 		ProductRepository rp=ProductRepository.instance();
 		RepositoryOrders ro=RepositoryOrders.getInstance_O();
-		
+		RepositoryClients rc=RepositoryClients.getMiRepository(null);
 		rp.loadFile();
 		System.out.println(rp.getAllProducts());
 		//mmc.newOrder();
