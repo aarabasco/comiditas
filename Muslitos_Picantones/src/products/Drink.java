@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Drink extends Product implements Serializable{
 	private boolean alcoholic;	
-	private List<Integer> bundlePack;
+	private Integer[] bundlePack;
 	
-	public Drink(String name, Double price, boolean forCeliac, boolean alcoholic, List<Integer>bundlePack) {
+	public Drink(String name, Double price, boolean forCeliac, boolean alcoholic, Integer[]bundlePack) {
 		super(name, price, forCeliac);
 		this.alcoholic=alcoholic;
 		this.bundlePack=bundlePack;
@@ -17,11 +17,11 @@ public class Drink extends Product implements Serializable{
 		return this.alcoholic;
 	}
 	
-	public List<Integer> getBundlePack() {
+	public Integer[] getBundlePack() {
 		return bundlePack;
 	}
 
-	public void setBundlePack(List<Integer> bundlePack) {
+	public void setBundlePack(Integer[] bundlePack) {
 		this.bundlePack = bundlePack;
 	}
 
