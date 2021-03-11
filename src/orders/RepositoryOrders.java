@@ -193,7 +193,7 @@ public class RepositoryOrders implements Serializable{
 			System.out.println(orders);
 			oi.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("No se han encontrado Order.dat");
+			System.out.println("No hay ordenes que cargar.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

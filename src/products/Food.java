@@ -29,4 +29,24 @@ public class Food extends Product implements Serializable{
 	public String toString() {
 		return super.toString()+" Food [forVegans=" + forVegans + "]";
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		int resultado=0;
+		
+        if(o instanceof Food) {
+        	
+        	Food aux=(Food) o;
+        	
+        	if (this.sold<aux.sold) {
+        		resultado = -1;      
+        	}
+            else if (this.sold>aux.sold) {    
+            	resultado = 1;      
+            }
+        }
+        	
+        return resultado;
+	}
 }

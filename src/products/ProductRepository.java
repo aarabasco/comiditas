@@ -162,6 +162,22 @@ public class ProductRepository implements Serializable{
 		return result;
 	}
 	
+	public List<Product> getMostSoldProducts(){
+		List<Product> result=null;
+		
+		if(products!=null&&products.size()>0) {
+			for(Product p:products) {
+				if(p.getSold()>0) {
+					result.add(p);
+				}
+			}
+			
+			result.sort(null);
+		}
+		
+		return result;
+	}
+	
 	public void saveFile(){
 		try {
 			FileOutputStream fo=new FileOutputStream(new File("products.dat"));
@@ -183,7 +199,7 @@ public class ProductRepository implements Serializable{
 			products=(List<Product>) oi.readObject();
 			oi.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Product file not found");
+			System.out.println("No hay productos que que cargar.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

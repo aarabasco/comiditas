@@ -138,7 +138,7 @@ public class RepositoryClients implements Serializable{
 			oo.flush();
 			oo.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("No se ha encontrado Client.dat");
+			System.out.println("No hay clientes que cargar.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

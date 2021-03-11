@@ -28,4 +28,19 @@ public class Drink extends Product implements Serializable{
 	public String toString() {
 		return super.toString()+" Drink [alcoholic="+alcoholic+"]";
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		int resultado=0;
+        if(o instanceof Drink) {
+        	
+        	Drink aux=(Drink) o;
+        	
+        	if (this.sold<aux.sold) {   resultado = -1;      }
+            else if (this.sold>aux.sold) {    resultado = 1;      }
+        }
+        	
+        return resultado;
+	}
 }

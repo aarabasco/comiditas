@@ -38,9 +38,60 @@ public class MainMenuController implements IMainMenuController{
 			
 			case 2:
 				
+				int option_Change_Order=U.getInt("\n¿Que desea hacer?\n"+
+					"1. Buscar y modificar una orden por su id.\n"+
+					"2. Buscar y modificar una orden por su fecha de encargo.\n"+
+					"3. Buscar y modificar una orden por su id y su fecha de encargo.\n"+
+					"Inserte una opción");
+				while(option_Change_Order<1||option>3) {
+					option_Change_Order=U.getInt("Inserte una opción válida");
+				}
+				
+				switch(option_Change_Order) {
+				case 1:
+					//aqui va changeOrder(Order o)
+					break;
+				
+				case 2:
+					//aqui va changeOrder(LocalDateTime d)
+					break;
+				
+				case 3:
+					//aqui va changeOrder(Order o, LocalDateTime d)
+					break;
+				
+				}
+				
+				
 				break;
 			
 			case 3:
+				
+				int option_Delete_order=-1;
+				option_Delete_order=U.getInt("\n¿Que desea hacer?\n"+
+					"1. Buscar y modificar una orden por su id.\n"+
+					"2. Buscar y modificar una orden por su fecha de encargo.\n"+
+					"3. Buscar y modificar una orden por su id y su fecha de encargo.\n"+
+					"Inserte una opción");
+				while(option_Delete_order<1||option_Delete_order>3) {
+					option_Delete_order=U.getInt("Inserte una opción válida");
+				}
+				
+				switch(option_Delete_order) {
+				case 1:
+					//aqui va deleteOrder(Order o)
+					break;
+				
+				case 2:
+					//aqui va deleteOrder(LocalDateTime d)
+					break;
+				
+				case 3:
+					//aqui va deleteOrder(Order o, LocalDateTime d)
+					break;
+				
+				}
+				
 				break;
 			
 			case 4:
