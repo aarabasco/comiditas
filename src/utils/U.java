@@ -163,4 +163,29 @@ public class U {
         U.p("Press ENTER to continue");
         U.getString();
     }
+    
+    public static double getDouble() {
+        double result = 0;
+        boolean valid = false;
+        do {
+            try {
+                result = Double.parseDouble(keyboard.nextLine());
+                valid = true;
+
+            } catch (IllegalStateException ex) {
+                keyboard = new Scanner(System.in);
+                U.P("Error in keyboard. Please, try it again: ");
+            } catch (NumberFormatException ex) {
+                U.P("Error reading decimal number. Please, try it again: ");
+            } catch (Exception ex) {
+                U.P("Error unknown. Please, try it again: ");
+            } 
+        } while (!valid);
+        return result;
+    }
+    
+	public static double getDouble(String f) {
+		U.p(f + " : ");
+        return U.getDouble();
+	}
 }

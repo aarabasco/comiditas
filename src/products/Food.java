@@ -1,6 +1,7 @@
 package products;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -37,10 +38,11 @@ public class Food extends Product implements Serializable{
 		this.bundlePack = bundlePack;
 	}
 
+	@Override
 	public String toString() {
-		return super.toString()+" Food [forVegans=" + forVegans + "]";
+		return "Food [forVegans=" + forVegans + ", bundlePack=" + Arrays.toString(bundlePack) + "]";
 	}
-
+	
 	@Override
 	public int compareTo(Object o) {
 		// TODO Auto-generated method stub

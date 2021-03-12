@@ -36,7 +36,7 @@ public class Generator {
 		}
 		
 		String name=U.getString("Inserte un nombre");
-		double price=(double)U.getFloat("Inserte un precio");
+		double price=(double)U.getDouble("Inserte un precio");
 		
 		int option=U.getInt("¿Producto para Celiacos? 1 Si, 2 No.");
 		while(option<1|option>2) {
@@ -76,7 +76,13 @@ public class Generator {
 			if(option==1) {
 				vegan=true;
 			}
-			Integer[]bundlePackA=(Integer[]) bundlePack.toArray();
+			
+			Integer[] bundlePackA=new Integer[bundlePack.size()];
+			for(int i=0; i<bundlePack.size();i++) {
+				bundlePackA[i]=bundlePack.get(i);
+			}
+			
+			
 			result=new Food(name, price, forCeliac, vegan,bundlePackA);
 		}
 		
@@ -90,8 +96,10 @@ public class Generator {
 				alcoholic=true;
 			}
 			
-			Integer[]bundlePackA=(Integer[]) bundlePack.toArray();
-			result=new Drink(name, price, forCeliac, alcoholic,bundlePackA);
+			Integer[] bundlePackA=new Integer[bundlePack.size()];
+			for(int i=0; i<bundlePack.size();i++) {
+				bundlePackA[i]=bundlePack.get(i);
+			}
 		}
 		
 		System.out.println(result.toString());
