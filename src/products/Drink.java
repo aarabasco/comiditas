@@ -1,12 +1,24 @@
 package products;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="drink")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Drink extends Product implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private boolean alcoholic;	
 	private Integer[] bundlePack;
 	
+	public Drink(){
+		super();
+		this.alcoholic=false;
+		this.bundlePack=new Integer[] {0};
+	}
 	public Drink(String name, Double price, boolean forCeliac, boolean alcoholic, Integer[]bundlePack) {
 		super(name, price, forCeliac);
 		this.alcoholic=alcoholic;

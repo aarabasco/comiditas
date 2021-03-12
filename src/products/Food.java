@@ -1,13 +1,24 @@
 package products;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="food")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Food extends Product implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
 	private boolean forVegans;
 	private Integer[] bundlePack;
-
+	
+	public Food(){
+		super();
+		this.forVegans=false;
+		this.bundlePack=new Integer[] {0};
+	}
 	public Food(String name, Double price, boolean forCeliac, boolean forVegans,Integer[]bundlePack) {
 		super(name, price, forCeliac);
 		this.forVegans = forVegans;

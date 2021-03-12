@@ -9,5 +9,5 @@ public interface IProducto {
 	public String getName();
 	public Double getPrice();
 	public boolean getIsForCeliac();
-	int comparteTo(Object o);
+	int compareTo(Object o);
 }

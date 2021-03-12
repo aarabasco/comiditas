@@ -1,23 +1,24 @@
 package products;
 
 import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
-import clients.*;
 
-public class ProductRepository implements Serializable{
-	private static final long serialVersionUID = 1L;
-	
+@XmlRootElement(name="repository")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ProductRepository{
 	private List<Product> products;
 	private static ProductRepository productRepository;
 	
@@ -179,6 +180,22 @@ public class ProductRepository implements Serializable{
 	}
 	
 	public void saveFile(){
+		JAXBContext jaxbC;
+		try {
+			jaxbC=JAXBContext.newInstance(ProductRepository.class);
+			Marshaller m = jaxbC.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			m.marshal(productRepository, new File("products.xml"));
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		/*
 		try {
 			FileOutputStream fo=new FileOutputStream(new File("products.dat"));
 			ObjectOutputStream oo=new ObjectOutputStream(fo);
@@ -190,6 +207,7 @@ public class ProductRepository implements Serializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 	public void loadFile(){
 		//NO FURULA
