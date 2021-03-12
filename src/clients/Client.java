@@ -2,20 +2,31 @@ package clients;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import orders.Order;
 
 /* Aquí tenemos el constructor de cliente. Este constructor sirve para establecer datos como:
  * el nombre, el dni, la edad, dirección y las ordenes de los clientes.
  */
-
+@XmlRootElement(name="client")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Client extends Person implements Serializable{
 	
 	private String address; 
 	private ArrayList<Order> orders;
 	private int points;
 	
-	
-	
+	public Client() {
+		super("", "", 0);
+		address="";
+		this.orders = new ArrayList<Order>();
+		this.points = 0;
+	}
+
 	public Client(String name, String dni, int age, String address) {
 		super(name, dni, age);
 		this.address = address;

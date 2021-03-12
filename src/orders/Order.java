@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import clients.*;
 import products.*;
 
@@ -14,7 +18,8 @@ import products.*;
  * @author david
  *
  */
-
+@XmlRootElement(name="order")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Order implements Serializable{
 	private static int tid=0;
 		
@@ -31,6 +36,7 @@ public class Order implements Serializable{
 	/**
 	 * 
 	 * @param cliente
+	 * @param productos2 
 	 * @param productos
 	 * @param total
 	 * @param datetime
@@ -38,7 +44,7 @@ public class Order implements Serializable{
 	 * @param delivered
 	 * @param payed
 	 */
-	public Order(Client cliente, double total, LocalDateTime datetime, String adress, Chart chart, boolean delivered,
+	public Order(Client cliente, ArrayList<Product> productos2, double total, LocalDateTime datetime, String adress, Chart chart, boolean delivered,
 			boolean payed) {
 		super();
 		this.id=tid+=1;
@@ -53,23 +59,9 @@ public class Order implements Serializable{
 		this.payed = payed;
 	}
 	
-	public Order(Client cliente,ArrayList<Product> productos, double total, LocalDateTime datetime, String adress, Chart chart, boolean delivered,
-			boolean payed) {
-		super();
-		this.id=tid+=1;
-		tid+=1;
-		this.cliente = cliente;
-		this.productos = productos;
-		this.total = total;
-		this.datetime = datetime;
-		this.adress = adress;
-		this.chart=chart;
-		this.delivered = delivered;
-		this.payed = payed;
-	}
-	
 	public Order() {
-		this(null,null,0,null,"NO-DATA",null,false,false);
+		this(null,null,0,null,"",null,false,false);
+		this.id=0;
 	}
 
 	public Client getCliente() {
@@ -155,7 +147,7 @@ public class Order implements Serializable{
 				 "Entregado:       "+entregado+".\n"+
 				 "Pagado:          "+pagado+".\n"+
 				 "-------------------------------------------\n"+
-				 "Total:           "+total+".\n";
+				 "Total:           "+String.format("%.1f", total)+".\n";
 	}
 
 	@Override

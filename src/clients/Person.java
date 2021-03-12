@@ -2,6 +2,14 @@ package clients;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+
+import products.Drink;
+import products.Food;
+
 /* Aquí tenemos el constructor de Persona. Este constructor sirve para establecer datos como:
  * el nombre, el dni, la edad.
  * También tiene una función boleana con la que comprobamos que no hay ningun usuario registrado con anterioridad
@@ -9,15 +17,24 @@ import java.io.Serializable;
  * Y finalmente el toString devuelve el nombre, dni y edad que hemos introducido.
  */
 
+@XmlRootElement(name="person")
+@XmlSeeAlso({Client.class})
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Person implements Serializable{
 	private String name; 
 	private String dni;
 	private int age;
 	
+	
+	
 	public Person (String name, String dni, int age) {
 		this.name=name;
 		this.dni=dni;
 		this.age=age;
+	}
+	
+	public Person() {
+		this("","",0);
 	}
 	
 	public String getName() {

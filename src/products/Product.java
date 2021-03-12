@@ -55,7 +55,7 @@ public abstract class Product implements IProducto,Serializable,Comparable {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", forCeliac=" + forCeliac + ", sold="
+		return super.toString()+ "Product [id=" + id + ", name=" + name + ", price=" + price + ", forCeliac=" + forCeliac + ", sold="
 				+ sold + "]";
 	}
 	public abstract int compareTo(Object o);

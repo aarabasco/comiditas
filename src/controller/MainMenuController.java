@@ -240,14 +240,19 @@ public class MainMenuController implements IMainMenuController{
 				else {
 					U.P("Se ha guardado la orden correctamente como no pagada.");
 				}
-				ro.addOrder(o);
+				result=ro.addOrder(o);
 				if(result) {
 					U.P("Se ha añadido la orden completamente.");
 					c.getOrders().add(o);
-					System.out.println(c.getOrders().size());
-					//prueba toString Order:
-					System.out.println(o);
+					U.P("\nSu orden es la siguiente: "+o);
+
+					rp.updateProductsInfo(chart);
 					
+					ro.saveFile();
+					rp.saveFile();
+					
+					//prueba sold increment:
+					System.out.println(chart.getLane().get(0).getSold());
 					completed=true;
 				}
 				else {

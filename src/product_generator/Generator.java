@@ -12,6 +12,7 @@ public class Generator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ProductRepository rp=ProductRepository.instance();
+
 		int n=U.getInt("Inserte el número de productos que se van a generar");
 		
 		while(n>0) {
@@ -100,6 +101,7 @@ public class Generator {
 			for(int i=0; i<bundlePack.size();i++) {
 				bundlePackA[i]=bundlePack.get(i);
 			}
+			result=new Drink(name, price, forCeliac, alcoholic,bundlePackA);
 		}
 		
 		System.out.println(result.toString());

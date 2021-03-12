@@ -9,17 +9,21 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import orders.Chart;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 @XmlRootElement(name="repository")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ProductRepository{
+public class ProductRepository {
 	private List<Product> products;
 	private static ProductRepository productRepository;
 	
@@ -178,6 +182,19 @@ public class ProductRepository{
 		}
 		
 		return result;
+	}
+	
+	public void updateProductsInfo(Chart c) {
+		Iterator i= products.iterator();
+		while(i.hasNext()) {
+			Product rep=(Product) i.next();
+			for(int j=0;j<c.getLane().size();j++) {
+				if(c.getLane().get(j).equals(rep)) {
+					rep.setSold(rep.getSold()+c.getCant().get(j));
+				}
+			}
+		}
+			
 	}
 	
 	public void saveFile(){

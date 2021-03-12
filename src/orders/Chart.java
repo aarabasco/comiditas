@@ -3,9 +3,15 @@ package orders;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import products.Product;
 import utils.U;
 
+@XmlRootElement(name="chart")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Chart implements Serializable{
 	private ArrayList<Product> lane;
 	private ArrayList<Integer> cant;

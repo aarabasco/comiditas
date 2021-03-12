@@ -11,10 +11,19 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import orders.Order;
 import products.Product;
 //seguira el modelo Singleton
 
+@XmlRootElement(name="repositoryO")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RepositoryOrders implements Serializable{
 
 	ArrayList<Order> orders;
@@ -197,6 +206,21 @@ public class RepositoryOrders implements Serializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveFileXML() {
+		JAXBContext JAXC;
+		try {
+			JAXC=JAXBContext.newInstance(RepositoryOrders.class);
+			Marshaller JMAR = JAXC.createMarshaller();
+			JMAR.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			JMAR.marshal(instanceO, new File("orders.xml"));
+			
+			
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
