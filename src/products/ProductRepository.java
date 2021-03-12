@@ -158,18 +158,15 @@ public class ProductRepository{
 	}
 	
 	public List<Product> getMostSoldProducts(){
-		List<Product> result=null;
-		
+		List<Product> result=new ArrayList<Product>();
 		if(products!=null&&products.size()>0) {
 			for(Product p:products) {
 				if(p.getSold()>0) {
 					result.add(p);
 				}
 			}
-			
 			result.sort(null);
 		}
-		
 		return result;
 	}
 	

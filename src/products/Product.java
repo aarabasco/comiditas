@@ -10,7 +10,9 @@ import interfaces.IProducto;
 @XmlRootElement(name="product")
 @XmlSeeAlso({Food.class,Drink.class})
 @XmlAccessorType(XmlAccessType.FIELD)
-public abstract class Product implements IProducto,Serializable,Comparable {
+public abstract class Product implements IProducto,Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
 	private static int count=0;
 	private String name;
