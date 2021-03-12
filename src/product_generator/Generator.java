@@ -76,11 +76,7 @@ public class Generator {
 			if(option==1) {
 				vegan=true;
 			}
-			Integer[]bundlePackA=new Integer[bundlePack.size()];
-			for (int i = 0; i < bundlePackA.length; i++) {
-				bundlePackA[i]=bundlePack.get(i);
-			}
-			
+			Integer[]bundlePackA=(Integer[]) bundlePack.toArray();
 			result=new Food(name, price, forCeliac, vegan,bundlePackA);
 		}
 		
@@ -93,12 +89,8 @@ public class Generator {
 			if(option==1) {
 				alcoholic=true;
 			}
-
-			Integer[]bundlePackA=new Integer[bundlePack.size()];
-			for (int i = 0; i < bundlePackA.length; i++) {
-				bundlePackA[i]=bundlePack.get(i);
-			}
 			
+			Integer[]bundlePackA=(Integer[]) bundlePack.toArray();
 			result=new Drink(name, price, forCeliac, alcoholic,bundlePackA);
 		}
 		
