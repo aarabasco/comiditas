@@ -1,5 +1,7 @@
 package products;
+
 import java.util.List;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -8,7 +10,12 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
+
 
 @XmlRootElement(name="repository")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -158,15 +165,18 @@ public class ProductRepository{
 	}
 	
 	public List<Product> getMostSoldProducts(){
-		List<Product> result=new ArrayList<Product>();
+		List<Product> result=null;
+		
 		if(products!=null&&products.size()>0) {
 			for(Product p:products) {
 				if(p.getSold()>0) {
 					result.add(p);
 				}
 			}
+			
 			result.sort(null);
 		}
+		
 		return result;
 	}
 	

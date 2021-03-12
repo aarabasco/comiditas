@@ -1,5 +1,7 @@
 package products;
 import java.io.Serializable;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,9 +12,7 @@ import interfaces.IProducto;
 @XmlRootElement(name="product")
 @XmlSeeAlso({Food.class,Drink.class})
 @XmlAccessorType(XmlAccessType.FIELD)
-public abstract class Product implements IProducto,Serializable {
-	private static final long serialVersionUID = 1L;
-	
+public abstract class Product implements IProducto,Serializable,Comparable {
 	private Integer id;
 	private static int count=0;
 	private String name;
