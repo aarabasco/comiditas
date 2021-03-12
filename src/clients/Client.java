@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import orders.Order;
 
+/* Aquí tenemos el constructor de cliente. Este constructor sirve para establecer datos como:
+ * el nombre, el dni, la edad, dirección y las ordenes de los clientes.
+ */
+
 public class Client extends Person implements Serializable{
 	
 	private String address; 
