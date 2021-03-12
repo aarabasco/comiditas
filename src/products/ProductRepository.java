@@ -5,6 +5,7 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -190,37 +191,18 @@ public class ProductRepository{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
-		/*
-		try {
-			FileOutputStream fo=new FileOutputStream(new File("products.dat"));
-			ObjectOutputStream oo=new ObjectOutputStream(fo);
-			oo.writeObject(products);
-			oo.flush();
-			oo.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("Product file not found");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
 	}
 	public void loadFile(){
-		//NO FURULA
+		JAXBContext jaxbC;
 		try {
-			FileInputStream fi=new FileInputStream("products.dat");
-			ObjectInputStream oi=new ObjectInputStream(fi);
-			products=(List<Product>) oi.readObject();
-			oi.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("No hay productos que que cargar.");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+			jaxbC=JAXBContext.newInstance(ProductRepository.class);
+			Unmarshaller um = jaxbC.createUnmarshaller();
+			ProductRepository r=(ProductRepository)um.unmarshal(new File("products.xml"));
+			for(Product i:r.getAllProducts()){
+				addProduct(i);
+			}
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
