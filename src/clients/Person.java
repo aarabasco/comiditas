@@ -2,6 +2,13 @@ package clients;
 
 import java.io.Serializable;
 
+/* Aquí tenemos el constructor de Persona. Este constructor sirve para establecer datos como:
+ * el nombre, el dni, la edad.
+ * También tiene una función boleana con la que comprobamos que no hay ningun usuario registrado con anterioridad
+ * con el mismo dni con el que nos estamos registrando.
+ * Y finalmente el toString devuelve el nombre, dni y edad que hemos introducido.
+ */
+
 public class Person implements Serializable{
 	private String name; 
 	private String dni;
