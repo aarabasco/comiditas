@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -18,8 +19,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import orders.Order;
-import products.Product;
 //seguira el modelo Singleton
 
 @XmlRootElement(name="repositoryO")
@@ -91,8 +90,8 @@ public class RepositoryOrders implements Serializable{
 		return result;
 	}
 	
-	public ArrayList<Order> getOrdersByDate(LocalDateTime d){
-		ArrayList<Order> result=null;
+	public ArrayList<Order> getOrdersByDate(LocalDate d){
+		ArrayList<Order> result=new ArrayList<Order>();
 	
 		for(int i=0;i<orders.size();i++) {
 			if(orders.get(i)!=null&&orders.get(i).getDatetime()!=null) {
@@ -145,11 +144,11 @@ public class RepositoryOrders implements Serializable{
 		return result;
 	}
 	
-	public double getinputByDate(LocalDateTime ini, LocalDateTime end) {
+	public double getinputByDate(LocalDate d) {
 		double result=0;
 		for(Order o:orders) {
 			if(o!=null&&o.getDatetime()!=null) {
-				if(o.getDatetime().isAfter(ini)&&o.getDatetime().isBefore(end)) {
+				if(o.getDatetime().equals(d)) {
 					result+=o.getTotal();
 				}
 			}

@@ -27,7 +27,7 @@ public class Order implements Serializable{
 	private Client cliente;
 	private ArrayList<Product> productos;
 	private double total;
-	private LocalDateTime datetime;
+	private LocalDate datetime;
 	private String adress;
 	private boolean delivered;
 	private boolean payed;
@@ -44,10 +44,10 @@ public class Order implements Serializable{
 	 * @param delivered
 	 * @param payed
 	 */
-	public Order(Client cliente, ArrayList<Product> productos2, double total, LocalDateTime datetime, String adress, Chart chart, boolean delivered,
+	public Order(Client cliente, ArrayList<Product> productos2, double total, LocalDate datetime, String adress, Chart chart, boolean delivered,
 			boolean payed) {
 		super();
-		this.id=tid+=1;
+		this.id=tid;
 		tid+=1;
 		this.cliente = cliente;
 		this.productos = new ArrayList<Product>();
@@ -84,11 +84,11 @@ public class Order implements Serializable{
 		this.total = total;
 	}
 
-	public LocalDateTime getDatetime() {
+	public LocalDate getDatetime() {
 		return datetime;
 	}
 
-	public void setDatetime(LocalDateTime datetime) {
+	public void setDatetime(LocalDate datetime) {
 		this.datetime = datetime;
 	}
 
@@ -129,7 +129,7 @@ public class Order implements Serializable{
 	public String toString() {
 		String pagado="No";
 		String entregado="No";
-		LocalDate fecha=datetime.toLocalDate();
+		LocalDate fecha=datetime;
 		if(isDelivered()) {
 			entregado="Si";
 		}

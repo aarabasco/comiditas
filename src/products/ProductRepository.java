@@ -174,6 +174,9 @@ public class ProductRepository {
 		if(products!=null&&products.size()>0) {
 			for(Product p:products) {
 				if(p.getSold()>0) {
+					if(result==null) {
+						result=new ArrayList<Product>();
+					}
 					result.add(p);
 				}
 			}

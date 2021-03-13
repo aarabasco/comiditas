@@ -216,12 +216,13 @@ public class uv {
 		System.out.println("Pulsa 2) para editar una orden.");
 		System.out.println("Pulsa 3) para eliminar una orden.");
 		System.out.println("Pulsa 4) para ver el dinero recaudado.");
-		System.out.println("Pulsa 5) para ver las ordenes por pagar.");
-		System.out.println("Pulsa 6) para ver las ordenes por atender.");
+		System.out.println("Pulsa 5) para ver todas las ordenes.");
+		System.out.println("Pulsa 6) para ver las ordenes por pagar.");
+		System.out.println("Pulsa 7) para ver las ordenes por atender.");
 		System.out.println("Pulsa 0) para guardar y cerrar.");
 	
 		int option = U.getInt("\nInserte una opcion");
-		while (option < 0 || option > 6) {
+		while (option < 0 || option > 7) {
 			option = U.getInt("\nInserte un valor valido");
 		} 
 		return option;
