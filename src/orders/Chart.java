@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 import products.Product;
 import products.ProductRepository;
-import sun.security.action.GetBooleanAction;
 import utils.U;
 
 @XmlRootElement(name="chart")
@@ -52,32 +52,27 @@ public class Chart implements Serializable{
 		}
 
 		this.total = result;
-		System.out.println(result);
 		
-		this.finalprice=result-=calculateDiscount();
-		System.out.println(finalprice);
 		
 	}
 
 	public void addProducttoChart(Product p, int cantidad) {
 		boolean añadido=false;
 		if (p != null && cantidad > 0) {
-			if(this.getLane()!=null&&this.getCant()!=null&&this.getLane().size()<1) {
+			if(this.getLane()!=null&&this.getCant()!=null&&!lane.contains(p)) {
 				lane.add(p);
 				cant.add(cantidad);
 				this.updatePrice();
 				añadido=true;
 			}
 			else {
-				for (int i = 0; i < lane.size()&&!añadido; i++) {
-					if (lane.get(i).getName().equals(p.getName())) {
-						int increase = cant.get(i) + cantidad;
-						cant.add(i, increase);
-						cant.remove(i + 1);
-						this.updatePrice();
-						añadido=true;
-					}
-				}
+				int n=lane.indexOf(p);
+				int total=cant.get(n)+cantidad;
+				cant.add(n, total);
+				cant.remove(n+1);
+				System.out.println("cant despues:"+cant);
+				this.updatePrice();
+				añadido=true;
 			}
 		}
 		if(añadido==false){
@@ -117,10 +112,15 @@ public class Chart implements Serializable{
 	public boolean comprobeDiscount() {
 		boolean result=false;
 		
-		if(this.lane!=null&&this.lane.size()>0) {
-			//completar
+		for(Product p:lane) {
+			for(int j=0;j<p.getBundlePack().length;j++) {
+				for(int i=0;i<lane.size();i++) {
+					if(lane.get(i).getId()==p.getBundlePack()[j]) {
+						System.out.println("entro?");return true;
+					}
+				}
+			}
 		}
-		
 		
 		return result;
 	}

@@ -26,7 +26,7 @@ public class MainMenuController implements IMainMenuController{
 		rp.loadFile();
 		ro.loadFile();
 		rc.loadFile();
-		
+		System.out.println(rp.getAllProducts());
 		U.P("¡Bienvenido a la aplicación de Muslitos_Picantes!\n");
 			int option=-1;
 		do {
@@ -317,11 +317,11 @@ public class MainMenuController implements IMainMenuController{
 		boolean completed = false;
 		boolean result=false;
 		do {
-			
+			U.P(chart.toString());
 			option=uv.ChooseOrderMenu();
 		
 			switch (option) {
-			
+
 			case 0:
 				U.P("\nSe ha cancelado su pedido. Volviendo al menú principal.");
 				completed=true;
