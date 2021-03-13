@@ -112,6 +112,37 @@ public class uv {
 		
 	}
 	
+	public static Order chooseOrder(ArrayList<Order> aux) {
+		Order result=null;
+		
+		String list="";
+		
+		if(aux!=null&&aux.size()>0) {
+			for (int i = 0; i < aux.size(); i++) {
+				if(aux.get(i)!=null&&aux.get(i).getCliente().getDni()!=null&&aux.get(i).getCliente().getName()!=null) {
+					list+=(i+1)+" "+aux.get(i).getCliente().getDni()+" "+aux.get(i).getCliente().getName()+" "+aux.get(i).getDatetime()+".\n";
+					if(i==aux.size()-1) {
+						list+="\nElija una opción";
+					}
+				}
+			}
+			
+			int option=U.getInt("\nHemos encontrado los siguientes resultados.\n"+
+					"Elija una orden para operar:\n"+
+					list);
+			while(option<1||option>aux.size()) {
+			option=U.getInt("\nHemos encontrado los siguientes resultados.\n"+
+							"Elija una opción válida:\n"+
+							list);
+			}
+			
+			result=aux.get(option-1);
+		}
+		
+		return result;
+		
+	}
+	
 	public static Product chooseProduct(ArrayList<Product> aux) {
 		Product result=null;
 		String list="";

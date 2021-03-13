@@ -34,7 +34,7 @@ public class RepositoryClients implements Serializable{
 		 return mirepository;
 	 }
 
-	public ArrayList<Client> getClientsByName(String nombre) {
+	public ArrayList<Client> searchClientsByName(String nombre) {
 		ArrayList <Client> result=null;
 		if(nombre != null) {
 			for(int i=0;i<clients.size();i++) {
@@ -61,10 +61,6 @@ public class RepositoryClients implements Serializable{
 			return clients;
 		}
 		return null;
-	}
-	
-	public ArrayList<Client> searchClientsName(){
-		return clients;
 	}
 	
 	public boolean updateClient(Client newCliente) {

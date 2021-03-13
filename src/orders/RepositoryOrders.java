@@ -91,13 +91,13 @@ public class RepositoryOrders implements Serializable{
 		return result;
 	}
 	
-	public ArrayList<Order> getOrdersByDate(LocalDateTime ini, LocalDateTime end){
+	public ArrayList<Order> getOrdersByDate(LocalDateTime d){
 		ArrayList<Order> result=null;
 	
 		for(int i=0;i<orders.size();i++) {
 			if(orders.get(i)!=null&&orders.get(i).getDatetime()!=null) {
 				
-				if(orders.get(i).getDatetime().isAfter(ini)&&orders.get(i).getDatetime().isBefore(end)) {
+				if(orders.get(i).getDatetime().equals(d)) {
 					result.add(orders.get(i));
 				}
 			}
@@ -199,7 +199,6 @@ public class RepositoryOrders implements Serializable{
 			ObjectInputStream oi=new ObjectInputStream(fi);
 
 			orders=(ArrayList<Order>)oi.readObject();
-			System.out.println(orders);
 			oi.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("No hay ordenes que cargar.");

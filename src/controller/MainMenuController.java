@@ -39,17 +39,17 @@ public class MainMenuController implements IMainMenuController{
 			case 2:
 				
 				int option_Change_Order=U.getInt("\n¿Que desea hacer?\n"+
-					"1. Buscar y modificar una orden por su id.\n"+
+					"1. Buscar y modificar una orden por su cliente.\n"+
 					"2. Buscar y modificar una orden por su fecha de encargo.\n"+
-					"3. Buscar y modificar una orden por su id y su fecha de encargo.\n"+
 					"Inserte una opción");
-				while(option_Change_Order<1||option>3) {
-					option_Change_Order=U.getInt("Inserte una opción válida");
+				while(option_Change_Order<1||option>2) {
+					option_Change_Order=U.getInt("\nInserte una opción válida");
 				}
 				
 				switch(option_Change_Order) {
 				case 1:
-					//aqui va changeOrder(Order o)
+					//aqui va changeOrder(Client c)
+					
 					break;
 				
 				case 2:
@@ -57,7 +57,7 @@ public class MainMenuController implements IMainMenuController{
 					break;
 				
 				case 3:
-					//aqui va changeOrder(Order o, LocalDateTime d)
+					//aqui va changeOrder, Local(Client c, DateTime d)
 					break;
 				
 				}
@@ -69,25 +69,72 @@ public class MainMenuController implements IMainMenuController{
 				
 				int option_Delete_order=-1;
 				option_Delete_order=U.getInt("\n¿Que desea hacer?\n"+
-					"1. Buscar y modificar una orden por su id.\n"+
-					"2. Buscar y modificar una orden por su fecha de encargo.\n"+
-					"3. Buscar y modificar una orden por su id y su fecha de encargo.\n"+
+					"1. Buscar y eliminar una orden por su cliente.\n"+
+					"2. Buscar y eliminar una orden por su fecha de encargo.\n"+
 					"Inserte una opción");
-				while(option_Delete_order<1||option_Delete_order>3) {
+				while(option_Delete_order<1||option_Delete_order>2) {
 					option_Delete_order=U.getInt("Inserte una opción válida");
 				}
 				
 				switch(option_Delete_order) {
 				case 1:
-					//aqui va deleteOrder(Order o)
+					//aqui va deleteOrder(Client c)
+					Client c=null;
+					do {
+						U.p("\nPuede buscar un cliente tanto por su DNI como por su nombre.\n");
+						String buscar_client=uv.search();
+						
+						if(uv.validarDNI(buscar_client)) {
+							ArrayList<Client> clientes=rc.searchClientsDNI(buscar_client);
+							c=uv.chooseClient(clientes);
+						}
+						else {
+							ArrayList<Client> clientes=rc.searchClientsByName(buscar_client);
+							c=uv.chooseClient(clientes);
+						}
+						
+						if(c==null) {
+							U.P("\nNo se ha encontrado el cliente. Inténtelo de nuevo.");
+						}
+					}while(c==null);
+					
+					if(c.getOrders()!=null&&c.getOrders().size()>0) {
+						mmc.changeOrder(c);
+					}
+					else {
+						U.P("\nEste cliente no tiene ordenes.");
+					}
+					
+					
 					break;
 				
 				case 2:
 					//aqui va deleteOrder(LocalDateTime d)
+					
+					LocalDateTime d=null;
+					do {
+						int year=U.getInt("Inserte el año (ej:2015)");
+						int month=U.getInt("Inserte el mes(ej: 11)");
+						while(month<1||month>12) {
+							month=U.getInt("Inserte el mes válido (del 01 al 12)");
+						}
+						int day=U.getInt("Inserte el día para buscar (ej: 03)");
+						while(day<1||day>31) {
+							month=U.getInt("Inserte un día válido (del 01 al 31)");
+						}
+						
+						d=LocalDateTime.parse(year+"-"+month+"-"+day);
+						if(d==null) {
+							U.P("\nNo se ha podido especificar su fecha. Indíquela de nuevo.");
+						}
+					}while(d==null);
+					
+					mmc.deleteOrder(d);
+					
 					break;
 				
 				case 3:
-					//aqui va deleteOrder(Order o, LocalDateTime d)
+					//aqui va deleteOrder(Client c, LocalDateTime d)
 					break;
 				
 				}
@@ -268,8 +315,10 @@ public class MainMenuController implements IMainMenuController{
 		
 	}
 
-	public void changeOrder(Order o) {
+	public void changeOrder(Client c) {
 		// TODO Auto-generated method stub
+		
+		
 		
 	}
 
@@ -277,27 +326,34 @@ public class MainMenuController implements IMainMenuController{
 		// TODO Auto-generated method stub
 		
 	}
-
-	public void changeOrder(Order o, LocalDateTime d) {
-		// TODO Auto-generated method stub
-		
-	}
 	
-	public void deleteOrder(Order o) {
+	public void deleteOrder(Client c) {
 		// TODO Auto-generated method stub
+		Order order_to_delete=null;
+		RepositoryOrders ro=RepositoryOrders.getInstance_O();
+		RepositoryClients rc=RepositoryClients.getMiRepository();
+		ProductRepository rp=ProductRepository.instance();
 		
+		ArrayList<Order> orders_of_this_client=ro.getOrdersByClient(c.getDni());
+		order_to_delete=uv.chooseOrder(orders_of_this_client);
+		ro.getAllOrder().remove(order_to_delete);
+		U.p("\nSe ha elminado correctamente su orden.");
 	}
 
 	public void deleteOrder(LocalDateTime d) {
 		// TODO Auto-generated method stub
+		Order order_to_delete=null;
+		RepositoryOrders ro=RepositoryOrders.getInstance_O();
+		RepositoryClients rc=RepositoryClients.getMiRepository();
+		ProductRepository rp=ProductRepository.instance();
+		
+		ArrayList<Order> orders_of_this_client=ro.getOrdersByDate(d);
+		order_to_delete=uv.chooseOrder(orders_of_this_client);
+		ro.getAllOrder().remove(order_to_delete);
+		U.p("\nSe ha elminado correctamente su orden.");
 		
 	}
-
-	public void deleteOrder(Order o, LocalDateTime d) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	public void cashToday() {
 		double cashToday=0;
 		RepositoryOrders ro=RepositoryOrders.getInstance_O();

@@ -9,12 +9,10 @@ import products.*;
 
 public interface IMainMenuController {
 	public void newOrder();
-	public void changeOrder(Order o);
+	public void changeOrder(Client c);
 	public void changeOrder(LocalDateTime d);
-	public void changeOrder(Order o, LocalDateTime d);
-	public void deleteOrder(Order o);
+	public void deleteOrder(Client c);
 	public void deleteOrder(LocalDateTime d);
-	public void deleteOrder(Order o, LocalDateTime d);
 	public void cashToday();
 	public void cashThisMonth();
 	public void cashTotal();
