@@ -80,10 +80,12 @@ public class Person implements Serializable{
 
 	@Override
 	public String toString() {
-		return "[name=" + name + ", dni=" + dni + ", age=" + age+",";
+		return "\nCliente "+this.getName()+"\n"+
+			     "-------------------------------------------\n"+
+			     "DNI del Cliente: "+this.getDni()+".\n"+
+				 "Edad:            "+this.getAge()+".";
+	
+	
 	}
-	
-	
-	
 	
 }

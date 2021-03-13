@@ -40,7 +40,14 @@ public class Food extends Product implements Serializable{
 
 	@Override
 	public String toString() {
-		return super.toString()+ "Food [forVegans=" + forVegans + ", bundlePack=" + Arrays.toString(bundlePack) + "]";
+		String vegan="No";
+		if(isForVegans()) {
+			vegan="Si";
+		}
+		
+		return super.toString()+ "\n"+
+			   "Para Veganos:   "+vegan+"\n."+
+			   "-------------------------------------------\n";
 	}
 	
 	@Override

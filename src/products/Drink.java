@@ -40,7 +40,14 @@ public class Drink extends Product implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Drink [alcoholic=" + alcoholic + ", bundlePack=" + Arrays.toString(bundlePack) + "]";
+		String alcoholic="No";
+		if(isAlcoholic()) {
+			alcoholic="Si";
+		}
+		
+		return super.toString()+ "\n"+
+			   "Contiene Alcohol:   "+alcoholic+"\n."+
+			   "-------------------------------------------\n";
 	}
 	@Override
 	public int compareTo(Object o) {

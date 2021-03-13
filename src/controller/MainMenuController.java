@@ -113,10 +113,27 @@ public class MainMenuController implements IMainMenuController{
 				
 				case 2:
 					//aqui va changeOrder(LocalDateTime d)
-					break;
-				
-				case 3:
-					//aqui va changeOrder, Local(Client c, DateTime d)
+					
+					LocalDate d=null;
+					do {
+						int year=U.getInt("Inserte el año (ej:2015)");
+						int month=U.getInt("Inserte el mes(ej: 11)");
+						while(month<1||month>12) {
+							month=U.getInt("Inserte el mes válido (del 01 al 12)");
+						}
+						int day=U.getInt("Inserte el día para buscar (ej: 03)");
+						while(day<1||day>31) {
+							month=U.getInt("Inserte un día válido (del 01 al 31)");
+						}
+						
+						d=LocalDate.of(year, month,day);
+						if(d==null) {
+							U.P("\nNo se ha podido especificar su fecha. Indíquela de nuevo.");
+						}
+					}while(d==null);
+					
+					mmc.changeOrder(d);
+					
 					break;
 				
 				}
@@ -488,6 +505,8 @@ public class MainMenuController implements IMainMenuController{
 			
 			ro.getAllOrder().remove(order_to_change);
 			ro.saveFile();
+			rc.saveFile();
+			rp.saveFile();;
 		}
 		
 		
@@ -495,7 +514,74 @@ public class MainMenuController implements IMainMenuController{
 
 	public void changeOrder(LocalDate d) {
 		// TODO Auto-generated method stub
+		boolean completed=false;
+		Order order_to_change=null;
 		
+		ArrayList<Order> orders_of_this_date=ro.getOrdersByDate(d);
+		order_to_change=uv.chooseOrder(orders_of_this_date);
+		U.P(order_to_change.toString());
+		
+		if(order_to_change!=null) {
+			
+			do {
+				String payed="No.";
+				String delivered="No.";
+				if(order_to_change.isPayed()) {
+					payed="Si.";
+				}
+				if(order_to_change.isDelivered()) {
+					delivered="Si.";
+				}
+				
+				int option=U.getInt("\n¿Qué desea modificar?\n"+
+									"1. Dirección de envio: "+order_to_change.getAdress()+".\n"+
+									"2. Pagado: "+payed+"\n"+
+									"2. Entregado: "+delivered+"\n");
+				while(option<1||option>3) {
+					option=U.getInt("\nInserte una opción válida");
+				}
+				
+				switch(option) {
+				case 1:
+					order_to_change.setAdress(U.getString("\nInserte la dirección de envío"));
+					break;
+				
+				case 2:
+					
+					if(!order_to_change.isPayed()) {
+						order_to_change.setPayed(true);
+					}else {
+						order_to_change.setPayed(false);
+					}
+					U.P("\nSe ha modificado correctamente el estado del pago de la orden.");
+					break;
+				
+				default:
+					if(!order_to_change.isDelivered()) {
+						order_to_change.setDelivered(true);
+					}else {
+						order_to_change.setDelivered(false);
+					}
+					U.P("\nSe ha modificado correctamente el estado de entrega de la orden.");
+					break;
+				}
+				
+				option=U.getInt("¿Desea continuar? 1 Si, 2 No");
+				while(option<1||option>2) {
+					option=U.getInt("\nInserte una opción válida");
+				}
+				if(option==2) {
+					completed=true;
+					U.P("Su orden ha sido modificada\n"+
+						order_to_change.toString());
+				}
+			}while(!completed);		
+			
+			ro.getAllOrder().remove(order_to_change);
+			ro.saveFile();
+			rc.saveFile();
+			rp.saveFile();
+		}
 	}
 	
 	public void deleteOrder(Client c) {
@@ -540,6 +626,8 @@ public class MainMenuController implements IMainMenuController{
 				ro.getAllOrder().remove(order_to_delete);
 				U.p("\nSe ha elminado correctamente su orden\n.");
 				ro.saveFile();
+				rc.saveFile();
+				rp.saveFile();
 			}
 		}
 		else {
