@@ -32,11 +32,17 @@ public class MainMenuController implements IMainMenuController{
 			option=uv.MainOrderMenu();
 			
 			switch(option) {
+			
+			//MAIN MENU CONTROLLER
+			
+			case 0:
+				break;	//SAVE AND EXIT
+			
 			case 1:
-				mmc.newOrder();
+				mmc.newOrder();	//NEW ORDER
 				break;
 			
-			case 2:
+			case 2: //CHANGE ORDER MENU
 				
 				int option_Change_Order=U.getInt("\n¿Que desea hacer?\n"+
 					"1. Buscar y modificar una orden por su cliente.\n"+
@@ -65,7 +71,7 @@ public class MainMenuController implements IMainMenuController{
 				
 				break;
 			
-			case 3:
+			case 3: //DELETE ORDER MENU
 				
 				int option_Delete_order=-1;
 				option_Delete_order=U.getInt("\n¿Que desea hacer?\n"+
@@ -141,24 +147,17 @@ public class MainMenuController implements IMainMenuController{
 				
 				break;
 			
-			case 4:
-				U.P("\nEl total recaudado es de "+ro.getAllInput()+" Euros.");
+			case 4: //CASH MENU
+				mmc.cashTotal();
 				break;
 				
 			case 5:
-				if(ro.getOrdersNoPayed()!=null&&ro.getOrdersNoPayed().size()>0) {
-					for(Order o: ro.getOrdersNoPayed()) {
-						U.P(o.toString()+"\n");
-					}
-				}
-				
-				else {
-					U.P("\nNo hay ordenes que mostrar.");
-				}
-				
+				mmc.viewOrdersNotPayed();
+			
 				break;
 				
 			default:
+				mmc.viewOrdersPendingDelevered();
 				break;
 			}
 		}while(option>0);
@@ -209,6 +208,12 @@ public class MainMenuController implements IMainMenuController{
 			option=uv.ChooseOrderMenu();
 		
 			switch (option) {
+			
+			case 0:
+				U.P("\nSe ha cancelado su pedido. Volviendo al menú principal.");
+				completed=true;
+				break;
+			
 			case 1:
 				result=omc.addProduct(chart);
 				
@@ -227,11 +232,11 @@ public class MainMenuController implements IMainMenuController{
 					result=omc.editLine(chart);	
 				}
 				else {
-					U.P("No hay ninguna línea que editar.");
+					U.P("\nNo hay ninguna línea que editar.");
 				}
 				
 				if(result) {
-					U.p("Se ha editado la linea correctamente.");
+					U.p("\nSe ha editado la linea correctamente.");
 				}
 				break;
 				
@@ -240,14 +245,14 @@ public class MainMenuController implements IMainMenuController{
 				if(chart.getLane().size()>0) {
 					result= omc.removeLine(chart);
 					if(result) {
-						U.P("Se ha eliminado la linea correctamente.");
+						U.P("\nSe ha eliminado la linea correctamente.");
 					}
 					else {
-						U.P("No se ha podido eliminar la linea.");
+						U.P("\nNo se ha podido eliminar la linea.");
 					}
 				}
 				else{
-					U.p("No hay ninguna linea que eliminar.");
+					U.P("\nNo hay ninguna linea que eliminar.");
 				}
 				break;
 				
@@ -256,14 +261,14 @@ public class MainMenuController implements IMainMenuController{
 					result=omc.setAdress(c);
 					if(result&&c.getAddress()!=null) {
 						a=c.getAddress();
-						U.P("Se ha insertado correctamente la dirección de envio.\n");
+						U.P("\nSe ha insertado correctamente la dirección de envio.\n");
 					}
 					else {
-						U.P("No se ha podido insertar correctamente la dirección de envio.\n");
+						U.P("\nNo se ha podido insertar correctamente la dirección de envio.\n");
 					}
 				}
 				else {
-					U.P("No se ha podido insertar la dirección, no hay ningún cliente.\n");
+					U.P("\nNo se ha podido insertar la dirección, no hay ningún cliente.\n");
 				}
 				
 				break;
@@ -282,14 +287,14 @@ public class MainMenuController implements IMainMenuController{
 				ArrayList<Product> productos=chart.ChartToOrder();
 				Order o=new Order(c,productos ,chart.getTotal(), ldc, a, chart, false, payed);
 				if(payed=true) {
-					U.P("Se ha guardado la orden correctamente como pagada.");
+					U.P("\nSe ha guardado la orden correctamente como pagada.");
 				}
 				else {
-					U.P("Se ha guardado la orden correctamente como no pagada.");
+					U.P("\nSe ha guardado la orden correctamente como no pagada.");
 				}
 				result=ro.addOrder(o);
 				if(result) {
-					U.P("Se ha añadido la orden completamente.");
+					U.P("\nSe ha añadido la orden completamente.");
 					c.getOrders().add(o);
 					U.P("\nSu orden es la siguiente: "+o);
 
@@ -303,7 +308,7 @@ public class MainMenuController implements IMainMenuController{
 					completed=true;
 				}
 				else {
-					U.p("No se ha podido añadir tu orden, ya existe una orden con este código.");
+					U.P("\nNo se ha podido añadir tu orden, ya existe una orden con este código.");
 				}
 				completed=true;
 			}
@@ -368,7 +373,7 @@ public class MainMenuController implements IMainMenuController{
 			}	
 		}
 		
-		U.P("\nEl total ganado hoy es de "+cashToday+" Euros.");
+		U.P("\nEl total ganado hoy es de "+String.format("%.1f", cashToday)+" Euros.");
 		
 	}
 
@@ -386,7 +391,7 @@ public class MainMenuController implements IMainMenuController{
 			}
 		}
 		
-		U.P("\nEl total ganado este mes es "+cashMonth+" Euros.");
+		U.P("\nEl total ganado este mes es "+String.format("%.1f", cashMonth)+" Euros.");
 		
 	}
 
@@ -398,7 +403,7 @@ public class MainMenuController implements IMainMenuController{
 			cashTotal+=o.getTotal();
 		}
 		
-		U.P("\nEl total ganado en total es de "+cashTotal+" Euros.");
+		U.P("\nEl total recaudado es de "+String.format("%.1f", cashTotal)+" Euros.");
 	}
 
 	public void viewOrdersNotPayed() {
@@ -408,7 +413,7 @@ public class MainMenuController implements IMainMenuController{
 		if(orders_not_payed!=null&&orders_not_payed.size()>0) {
 			for(Order o:orders_not_payed) {
 				if(o!=null) {
-					U.P(o.toString());
+					U.P(o.toString()+"\n");
 				}
 				
 			}

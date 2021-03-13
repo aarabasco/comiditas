@@ -212,15 +212,16 @@ public class uv {
 	
 	public static int MainOrderMenu() {
 		
-		System.out.println("\nPulsa 1) para crear una nueva orden");
-		System.out.println("Pulsa 2) para editar una orden");
-		System.out.println("Pulsa 3) para eliminar una orden");
-		System.out.println("Pulsa 4) para ver el dinero recaudado");
-		System.out.println("Pulsa 5) para ver las ordenes por pagar");
-		System.out.println("Pulsa 0) para guardar y cerrar");
+		System.out.println("\nPulsa 1) para crear una nueva orden.");
+		System.out.println("Pulsa 2) para editar una orden.");
+		System.out.println("Pulsa 3) para eliminar una orden.");
+		System.out.println("Pulsa 4) para ver el dinero recaudado.");
+		System.out.println("Pulsa 5) para ver las ordenes por pagar.");
+		System.out.println("Pulsa 6) para ver las ordenes por atender.");
+		System.out.println("Pulsa 0) para guardar y cerrar.");
 	
 		int option = U.getInt("\nInserte una opcion");
-		while (option < 0 || option > 5) {
+		while (option < 0 || option > 6) {
 			option = U.getInt("\nInserte un valor valido");
 		} 
 		return option;
