@@ -21,7 +21,8 @@ import products.*;
 @XmlRootElement(name="order")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Order implements Serializable{
-	private static int tid=0;
+	
+	private static int tid;
 		
 	private int id;
 	private Client cliente;
@@ -47,8 +48,14 @@ public class Order implements Serializable{
 	public Order(Client cliente, ArrayList<Product> productos2, double total, LocalDate datetime, String adress, Chart chart, boolean delivered,
 			boolean payed) {
 		super();
-		this.id=tid;
-		tid+=1;
+		RepositoryOrders ro=RepositoryOrders.getInstance_O();
+		if(ro.getAllOrder().size()>0) {
+			int last=ro.getAllOrder().get(ro.getAllOrder().size()-1).getId();
+			this.id=last+1;
+		}
+		else {
+			this.id=0;
+		}
 		this.cliente = cliente;
 		this.productos = new ArrayList<Product>();
 		this.total = total;
@@ -61,7 +68,8 @@ public class Order implements Serializable{
 	
 	public Order() {
 		this(null,null,0,null,"",null,false,false);
-		this.id=0;
+		this.id=tid;
+		this.id=tid++;
 	}
 
 	public Client getCliente() {
@@ -108,7 +116,7 @@ public class Order implements Serializable{
 	public boolean isPayed() {
 		return payed;
 	}
-
+	
 	public void setPayed(boolean payed) {
 		this.payed = payed;
 	}

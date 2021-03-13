@@ -23,7 +23,6 @@ public class MainMenuController implements IMainMenuController{
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stu
 		
-		
 		rp.loadFile();
 		ro.loadFile();
 		rc.loadFile();
@@ -38,6 +37,7 @@ public class MainMenuController implements IMainMenuController{
 			//MAIN MENU CONTROLLER
 			
 			case 0:
+				U.P("\nFin del Programa");
 				break;	//SAVE AND EXIT
 			
 			case 1:
@@ -58,7 +58,58 @@ public class MainMenuController implements IMainMenuController{
 				case 1:
 					//aqui va changeOrder(Client c)
 					
-					break;
+					
+					Client c=null;
+					boolean encontrado=false;
+					
+					while(!encontrado) {
+						int option_c=U.getInt("\n1. Buscar por dni.\n"+
+											"2. Buscar por nombre.\n"+
+											"3. Listar todos los clientes.");
+						while(option_c<1||option_c>3) {
+						option=U.getInt("\n¿Inserte una opción válida.");	
+						}
+						
+						switch(option_c) {
+						case 1:
+							U.P("\nEstás buscando por dni.");
+							String dni=uv.search(); //
+							ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
+							c=uv.chooseClient(dnilist);
+							break;
+						
+						case 2:
+							U.P("\nEstás buscando por nombre.");
+							String nombre=uv.search();
+							ArrayList<Client> namelist= rc.searchClientsByName(nombre);
+							c=uv.chooseClient(namelist);
+							break;
+							
+						default:
+							ArrayList<Client> alllist= rc.getAllClients();
+							c=uv.chooseClient(alllist);
+							break;
+						}
+
+						if(c!=null) {
+							encontrado=true;
+						}
+						else {
+							U.P("\nNo se ha encontrado el cliente. Inténtelo de nuevo.");
+						}
+				}
+				
+				if(c.getOrders()!=null&&c.getOrders().size()>0) {
+					mmc.changeOrder(c);
+				}
+				else {
+					U.P("\nEste cliente no tiene ordenes.");
+				}
+				
+				
+				break;
+					
+					
 				
 				case 2:
 					//aqui va changeOrder(LocalDateTime d)
@@ -88,26 +139,47 @@ public class MainMenuController implements IMainMenuController{
 				case 1:
 					//aqui va deleteOrder(Client c)
 					Client c=null;
-					do {
-						U.p("\nPuede buscar un cliente tanto por su DNI como por su nombre.\n");
-						String buscar_client=uv.search();
+						boolean encontrado=false;
 						
-						if(uv.validarDNI(buscar_client)) {
-							ArrayList<Client> clientes=rc.searchClientsDNI(buscar_client);
-							c=uv.chooseClient(clientes);
-						}
-						else {
-							ArrayList<Client> clientes=rc.searchClientsByName(buscar_client);
-							c=uv.chooseClient(clientes);
-						}
-						
-						if(c==null) {
-							U.P("\nNo se ha encontrado el cliente. Inténtelo de nuevo.");
-						}
-					}while(c==null);
+						while(!encontrado) {
+							int option_c=U.getInt("\n1. Buscar por dni.\n"+
+												"2. Buscar por nombre.\n"+
+												"3. Listar todos los clientes.");
+							while(option_c<1||option_c>3) {
+							option=U.getInt("\n¿Inserte una opción válida.");	
+							}
+							
+							switch(option_c) {
+							case 1:
+								U.P("\nEstás buscando por dni.");
+								String dni=uv.search(); //
+								ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
+								c=uv.chooseClient(dnilist);
+								break;
+							
+							case 2:
+								U.P("\nEstás buscando por nombre.");
+								String nombre=uv.search();
+								ArrayList<Client> namelist= rc.searchClientsByName(nombre);
+								c=uv.chooseClient(namelist);
+								break;
+								
+							default:
+								ArrayList<Client> alllist= rc.getAllClients();
+								c=uv.chooseClient(alllist);
+								break;
+							}
+
+							if(c!=null) {
+								encontrado=true;
+							}
+							else {
+								U.P("\nNo se ha encontrado el cliente. Inténtelo de nuevo.");
+							}
+					}
 					
 					if(c.getOrders()!=null&&c.getOrders().size()>0) {
-						mmc.changeOrder(c);
+						mmc.deleteOrder(c);
 					}
 					else {
 						U.P("\nEste cliente no tiene ordenes.");
@@ -117,7 +189,6 @@ public class MainMenuController implements IMainMenuController{
 					break;
 				
 				case 2:
-					//aqui va deleteOrder(LocalDateTime d)
 					
 					LocalDate d=null;
 					do {
@@ -139,10 +210,6 @@ public class MainMenuController implements IMainMenuController{
 					
 					mmc.deleteOrder(d);
 					
-					break;
-				
-				case 3:
-					//aqui va deleteOrder(Client c, LocalDateTime d)
 					break;
 				
 				}
@@ -186,14 +253,39 @@ public class MainMenuController implements IMainMenuController{
 		//BUSQUEDA DE CLIENTE O CREACIÓN DE UNO
 		boolean nuevoCliente=uv.usarcliente(); //
 		if(nuevoCliente) {
-			c=uv.createClientn();  //
+			c=uv.createClient();  //
 		}
 		else {
 			boolean encontrado=false;
 			while(!encontrado) {
-				String dni=uv.search(); //
-				ArrayList<Client> clist= rc.searchClientsDNI(dni);
-				c=uv.chooseClient(clist); //
+				int option=U.getInt("\n1. Buscar por dni.\n"+
+									"2. Buscar por nombre.\n"+
+									"3. Listar todos los clientes.");
+				while(option<1||option>3) {
+				option=U.getInt("\n¿Inserte una opción válida.");	
+				}
+				
+				switch(option) {
+				case 1:
+					U.P("\nEstás buscando por dni.");
+					String dni=uv.search(); //
+					ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
+					c=uv.chooseClient(dnilist);
+					break;
+				
+				case 2:
+					U.P("\nEstás buscando por nombre.");
+					String nombre=uv.search();
+					ArrayList<Client> namelist= rc.searchClientsByName(nombre);
+					c=uv.chooseClient(namelist);
+					break;
+					
+				default:
+					ArrayList<Client> alllist= rc.getAllClients();
+					c=uv.chooseClient(alllist);
+					break;
+				}
+
 				if(c!=null) {
 					encontrado=true;
 				}
@@ -298,8 +390,12 @@ public class MainMenuController implements IMainMenuController{
 				}
 				result=ro.addOrder(o);
 				if(result) {
+					if(!rc.getAllClients().contains(c)) {
+						rc.getAllClients().add(c);
+					}
 					U.P("\nSe ha añadido la orden completamente.");
 					c.getOrders().add(o);
+					rc.saveFile();
 					U.P("\nSu orden es la siguiente: "+o);
 
 					rp.updateProductsInfo(chart);
@@ -326,7 +422,73 @@ public class MainMenuController implements IMainMenuController{
 
 	public void changeOrder(Client c) {
 		// TODO Auto-generated method stub
+		boolean completed=false;
+		Order order_to_change=null;
 		
+		ArrayList<Order> orders_of_this_client=ro.getOrdersByClient(c.getDni());
+		order_to_change=uv.chooseOrder(orders_of_this_client);
+		
+		U.P(order_to_change.toString());
+		
+		if(order_to_change!=null) {
+			
+			do {
+				String payed="No.";
+				String delivered="No.";
+				if(order_to_change.isPayed()) {
+					payed="Si.";
+				}
+				if(order_to_change.isDelivered()) {
+					delivered="Si.";
+				}
+				
+				int option=U.getInt("\n¿Qué desea modificar?\n"+
+									"1. Dirección de envio: "+order_to_change.getAdress()+".\n"+
+									"2. Pagado: "+payed+"\n"+
+									"2. Entregado: "+delivered+"\n");
+				while(option<1||option>3) {
+					option=U.getInt("\nInserte una opción válida");
+				}
+				
+				switch(option) {
+				case 1:
+					order_to_change.setAdress(U.getString("\nInserte la dirección de envío"));
+					break;
+				
+				case 2:
+					
+					if(!order_to_change.isPayed()) {
+						order_to_change.setPayed(true);
+					}else {
+						order_to_change.setPayed(false);
+					}
+					U.P("\nSe ha modificado correctamente el estado del pago de la orden.");
+					break;
+				
+				default:
+					if(!order_to_change.isDelivered()) {
+						order_to_change.setDelivered(true);
+					}else {
+						order_to_change.setDelivered(false);
+					}
+					U.P("\nSe ha modificado correctamente el estado de entrega de la orden.");
+					break;
+				}
+				
+				option=U.getInt("¿Desea continuar? 1 Si, 2 No");
+				while(option<1||option>2) {
+					option=U.getInt("\nInserte una opción válida");
+				}
+				if(option==2) {
+					completed=true;
+					U.P("Su orden ha sido modificada\n"+
+						order_to_change.toString());
+				}
+			}while(!completed);		
+			
+			ro.getAllOrder().remove(order_to_change);
+			ro.saveFile();
+		}
 		
 		
 	}
@@ -344,19 +506,20 @@ public class MainMenuController implements IMainMenuController{
 		order_to_delete=uv.chooseOrder(orders_of_this_client);
 		
 		if(order_to_delete!=null) {
-			int option=U.getInt("\n¿Está seguro de que desea eliminar la orden? 1 para eliminar, 2 para cancelar");
-			while(option<1||option>2) {
-				option=U.getInt("\nInserte una opción válida");
-			}
+			U.P(order_to_delete.toString());
 			
-			if(option==1) {
-				ro.getAllOrder().remove(order_to_delete);
-				U.p("\nSe ha elminado correctamente su orden\n.");
-				ro.saveFile();
+			if(order_to_delete!=null) {
+				int option=U.getInt("\n¿Está seguro de que desea eliminar la orden? 1 para eliminar, 2 para cancelar");
+				while(option<1||option>2) {
+					option=U.getInt("\nInserte una opción válida");
+				}
+				
+				if(option==1) {
+					ro.getAllOrder().remove(order_to_delete);
+					U.p("\nSe ha elminado correctamente su orden\n.");
+					ro.saveFile();
+				}
 			}
-		}
-		else {
-			U.P("\nNo se ha encontrado ninguna orden con esos datos.");
 		}
 	}
 

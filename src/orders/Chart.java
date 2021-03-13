@@ -2,12 +2,14 @@ package orders;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import products.Product;
+import products.ProductRepository;
 import utils.U;
 
 @XmlRootElement(name="chart")
@@ -41,6 +43,7 @@ public class Chart implements Serializable{
 	}
 
 	public void updatePrice() {
+		
 		double result = 0;
 
 		for (int i = 0; i < lane.size(); i++) {
@@ -48,6 +51,11 @@ public class Chart implements Serializable{
 		}
 
 		this.total = result;
+		System.out.println(result);
+		
+		this.finalprice=result-=calculateDiscount();
+		System.out.println(finalprice);
+		
 	}
 
 	public void addProducttoChart(Product p, int cantidad) {
@@ -105,4 +113,29 @@ public class Chart implements Serializable{
 		this.total=total;
 	}
 
+	public int calculateDiscount() {
+		ProductRepository rp=ProductRepository.instance();
+		
+		int result=0;
+		
+		Product mostExpensiveProduct=null;
+		if(lane!=null&&lane.size()>0){
+			double mostExpensivePrice=0;
+			for(Product p:lane) {
+				if(p.getBundlePack().length>0&&p.getPrice()>mostExpensivePrice) {
+					mostExpensiveProduct=p;
+				}
+			}
+		}
+		
+		List<Product> bundleOfMostExpensive=rp.getBundleProducts(mostExpensiveProduct);
+		bundleOfMostExpensive.sort(null);
+		
+		if(mostExpensiveProduct!=null&&bundleOfMostExpensive!=null) {
+			result+=bundleOfMostExpensive.get(bundleOfMostExpensive.size()-1).getPrice()*0.05;
+			result+=mostExpensiveProduct.getPrice()*0.05;
+		}
+		
+		return result;
+	}
 }

@@ -49,7 +49,7 @@ public class RepositoryClients implements Serializable{
 				}
 			}
 		}
-		return clients;
+		return result;
 	 }
 	 
 	public void setclients(ArrayList<Client> clients) {
@@ -105,8 +105,21 @@ public class RepositoryClients implements Serializable{
 	}
 
 	public ArrayList<Client> searchClientsDNI(String dni) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList <Client> result=null;
+		if(dni != null&&clients.size()>0) {
+			for(int i=0;i<clients.size();i++) {
+				
+				if(clients.get(i)!=null&&clients.get(i).getName()!=null) {
+					if(clients.get(i).getDni().equals(dni)) {
+						if(result==null) {
+							result=new ArrayList<Client>();
+						}
+						result.add(clients.get(i));
+					}
+				}
+			}
+		}
+		return result;
 	}
 	
 	public void loadFile() {
@@ -115,7 +128,6 @@ public class RepositoryClients implements Serializable{
 			ObjectInputStream oi=new ObjectInputStream(fi);
 
 			clients=(ArrayList<Client>)oi.readObject();
-			System.out.println(clients);
 			oi.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("No se han encontrado Client.dat");
@@ -126,7 +138,7 @@ public class RepositoryClients implements Serializable{
 		}
 	}
 	
-	public void safeFile() {
+	public void saveFile() {
 		try {
 			FileOutputStream fo=new FileOutputStream(new File("Client.dat"));
 			ObjectOutputStream oo=new ObjectOutputStream(fo);

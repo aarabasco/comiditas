@@ -36,10 +36,8 @@ public class uv {
 		 * correctos.
 		 */
 		
-		int option = U.getInt();
-		char nombre;
 		int edad;
-		String name=U.getString("\nInserte nombre");
+		String name=U.getString("\nInserte un nombre");
 		String dni="";
 		boolean correcto=false;
 
@@ -50,7 +48,7 @@ public class uv {
 	
 		edad=U.getInt("\nInserte una edad");
 		if (edad < 12 || edad > 130) {
-			option=U.getInt("\nInserte un valor valido");
+			edad=U.getInt("\nInserte un valor valido");
 		} 
 		
 		String address=U.getString("\nInserte una direccion");
@@ -89,7 +87,7 @@ public class uv {
 		if(aux!=null&&aux.size()>0) {
 			for (int i = 0; i < aux.size(); i++) {
 				if(aux.get(i)!=null&&aux.get(i).getDni()!=null) {
-					list+=(i+1)+" "+aux.get(i).getDni()+".\n";
+					list+=(i+1)+" "+aux.get(i).getDni()+", "+aux.get(i).getName()+", nº pedidos: "+aux.get(i).getOrders().size()+".\n";
 					if(i==aux.size()-1) {
 						list+="\nElija una opción";
 					}
@@ -97,7 +95,7 @@ public class uv {
 			}
 			
 			int option=U.getInt("\nHemos encontrado los siguientes resultados.\n"+
-					"Elija un producto para añadirlo:\n"+
+					"Elija un cliente para operar:\n"+
 					list);
 			while(option<1||option>aux.size()) {
 			option=U.getInt("\nHemos encontrado los siguientes resultados.\n"+
@@ -118,9 +116,10 @@ public class uv {
 		String list="";
 		
 		if(aux!=null&&aux.size()>0) {
+
 			for (int i = 0; i < aux.size(); i++) {
 				if(aux.get(i)!=null&&aux.get(i).getCliente().getDni()!=null&&aux.get(i).getCliente().getName()!=null) {
-					list+=(i+1)+" "+aux.get(i).getCliente().getDni()+" "+aux.get(i).getCliente().getName()+" "+aux.get(i).getDatetime()+".\n";
+					list+=(i+1)+" "+aux.get(i).getCliente().getDni()+" "+aux.get(i).getCliente().getName()+" "+aux.get(i).getDatetime()+"  "+aux.get(i).getTotal()+".\n";
 					if(i==aux.size()-1) {
 						list+="\nElija una opción";
 					}
@@ -129,14 +128,18 @@ public class uv {
 			
 			int option=U.getInt("\nHemos encontrado los siguientes resultados.\n"+
 					"Elija una orden para operar:\n"+
+					"\n-----DNI-----Nombre---Fecha---Total\n"+
 					list);
 			while(option<1||option>aux.size()) {
 			option=U.getInt("\nHemos encontrado los siguientes resultados.\n"+
-							"Elija una opción válida:\n"+
+					"\n-----DNI-----Nombre---Fecha---Total\n"+
 							list);
 			}
 			
 			result=aux.get(option-1);
+		}
+		else {
+			U.p("\nNo se ha encontrado ninguna orden.");
 		}
 		
 		return result;
