@@ -53,6 +53,10 @@ public abstract class Product implements IProducto,Serializable,Comparable {
 		this.sold = sold;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
 		String Celiac="No";
@@ -72,5 +76,9 @@ public abstract class Product implements IProducto,Serializable,Comparable {
 			     "Para Celiacos:   "+Celiac+".";
 
 	}
+	
+	
 	public abstract int compareTo(Object o);
+	
+	
 }

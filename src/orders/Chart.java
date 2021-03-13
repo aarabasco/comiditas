@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import products.Product;
 import products.ProductRepository;
+import sun.security.action.GetBooleanAction;
 import utils.U;
 
 @XmlRootElement(name="chart")
@@ -113,28 +114,13 @@ public class Chart implements Serializable{
 		this.total=total;
 	}
 
-	public int calculateDiscount() {
-		ProductRepository rp=ProductRepository.instance();
+	public boolean comprobeDiscount() {
+		boolean result=false;
 		
-		int result=0;
-		
-		Product mostExpensiveProduct=null;
-		if(lane!=null&&lane.size()>0){
-			double mostExpensivePrice=0;
-			for(Product p:lane) {
-				if(p.getBundlePack().length>0&&p.getPrice()>mostExpensivePrice) {
-					mostExpensiveProduct=p;
-				}
-			}
+		if(this.lane!=null&&this.lane.size()>0) {
+			//completar
 		}
 		
-		List<Product> bundleOfMostExpensive=rp.getBundleProducts(mostExpensiveProduct);
-		bundleOfMostExpensive.sort(null);
-		
-		if(mostExpensiveProduct!=null&&bundleOfMostExpensive!=null) {
-			result+=bundleOfMostExpensive.get(bundleOfMostExpensive.size()-1).getPrice()*0.05;
-			result+=mostExpensiveProduct.getPrice()*0.05;
-		}
 		
 		return result;
 	}
