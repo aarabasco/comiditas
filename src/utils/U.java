@@ -54,12 +54,12 @@ public class U {
 
             } catch (IllegalStateException ex) {
                 keyboard = new Scanner(System.in);
-                U.P("Error in keyboard. Please, try it again: ");
+                U.P("\n Error al insertar datos, inténtelo de nuevo: ");
             } catch (NumberFormatException ex) {
-                U.P("Error reading integer type. Please, try it again: ");
+                U.P("\n Error leyendo caracter. Inténtelo de nuevo: ");
             }catch (Exception ex) {
                 ex.printStackTrace();
-                U.P("Error unknown. Please, try it again: ");
+                U.P("\n Error desconocido. Inténtalo de nuevo: ");
             }
         } while (!valid);
         return result;
@@ -80,12 +80,12 @@ public class U {
 
             } catch (IllegalStateException ex) {
                 keyboard = new Scanner(System.in);
-                U.P("Error in keyboard. Please, try it again: ");
+                U.P("\n Error al insertar datos, inténtelo de nuevo: ");
             } catch (NumberFormatException ex) {
-                U.P("Error reading integer type. Please, try it again: ");
+            	U.P("\n Error leyendo un número entero. Inténtelo de nuevo: ");
             }catch (Exception ex) {
                 ex.printStackTrace();
-                U.P("Error unknown. Please, try it again: ");
+                U.P("\n Error desconocido. Inténtalo de nuevo: ");
             }
         } while (!valid);
         return result;
@@ -113,11 +113,11 @@ public class U {
 
             } catch (IllegalStateException ex) {
                 keyboard = new Scanner(System.in);
-                U.P("Error in keyboard. Please, try it again: ");
+                U.P("\n Error al insertar datos, inténtelo de nuevo: ");
             } catch (NumberFormatException ex) {
-                U.P("Error reading decimal number. Please, try it again: ");
+            	U.P("\n Error leyendo un número decimal. Inténtelo de nuevo: ");
             } catch (Exception ex) {
-                U.P("Error unknown. Please, try it again: ");
+            	U.P("\n Error desconocido. Inténtalo de nuevo: ");
             } 
         } while (!valid);
         return result;
@@ -144,7 +144,7 @@ public class U {
                 valid = true;
 
             } catch (Exception ex) {
-                U.P("Error unknown. Please, try it again: ");
+                U.P("\n Error desconocido. Inténtelo de nuevo:");
             }
         } while (!valid);
         return result;
@@ -160,7 +160,7 @@ public class U {
     }
     
     public static void getEnter(String f){
-        U.p("Press ENTER to continue");
+        U.p("\n Inserte ENTER para continuar");
         U.getString();
     }
     
@@ -174,11 +174,11 @@ public class U {
 
             } catch (IllegalStateException ex) {
                 keyboard = new Scanner(System.in);
-                U.P("Error in keyboard. Please, try it again: ");
+                U.P("\n Error del teclado. Inténtelo de nuevo: ");
             } catch (NumberFormatException ex) {
-                U.P("Error reading decimal number. Please, try it again: ");
+                U.P("\n Error leyendo un número decimal. Inténtelo de nuevo: ");
             } catch (Exception ex) {
-                U.P("Error unknown. Please, try it again: ");
+            	U.P("\n Error desconocido. Inténtelo de nuevo:");
             } 
         } while (!valid);
         return result;
