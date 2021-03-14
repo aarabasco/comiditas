@@ -160,7 +160,7 @@ public class uv {
 			}
 			
 			int option=U.getInt("\nHemos encontrado los siguientes resultados.\n"+
-					"Elija un producto para añadirlo:\n"+
+					"Elija un producto para operar:\n"+
 					list);
 			
 			while(option<1||option>aux.size()) {
@@ -219,10 +219,12 @@ public class uv {
 		System.out.println("Pulsa 2) para editar una orden.");
 		System.out.println("Pulsa 3) para eliminar una orden.");
 		System.out.println("Pulsa 4) para entrar en la Base de Datos.");
+		System.out.println("Pulsa 5) para eliminar un cliente.");
+		System.out.println("Pulsa 6) para eliminar un producto.");
 		System.out.println("Pulsa 0) para guardar y cerrar.");
 	
 		int option = U.getInt("\nInserte una opcion");
-		while (option < 0 || option > 4) {
+		while (option < 0 || option > 6) {
 			option = U.getInt("\nInserte un valor valido");
 		} 
 		return option;

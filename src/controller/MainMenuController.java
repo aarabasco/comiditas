@@ -283,55 +283,94 @@ public class MainMenuController implements IMainMenuController{
 					break;
 					
 				case 7: //ver todos los clientes
-					ArrayList<Client> call=rc.getAllClients();
-					if(call!=null&&call.size()>0) {
-						for(Client c:call) {
-							U.P(c.toString());
-						}
+					if(rc.getAllClients()!=null&rc.getAllClients().size()>0) {
+						ArrayList<Client> call=rc.getAllClients();
+							for(Client c:call) {
+								U.P(c.toString());
+							}
 					}
 					else {
-						U.p("\nNo hay clientes que mostrar.");
+						U.P("\nNo hay clientes que mostrar.");
 					}
 					break;
 					
 				case 8: //ver todos los productos
-					List<Product> pall=rp.getAllProducts();
-					if(pall!=null&&pall.size()>0) {
+					if(rp.getAllProducts()!=null&&rp.getAllProducts().size()>0) {
+						List<Product> pall=rp.getAllProducts();
 						for(Product p:pall) {
 							U.P(p.toString());
 						}
 					}
-					else {
-						U.p("\nNo hay productos que mostrar.");
-					}
+					
+					
+
 					break;
 					
 				case 9: //ver todas las bebidas
-					List<Product> dall=rp.getAllDrinks();
-					if(dall!=null&&dall.size()>0) {
+					
+					if(rp.getAllDrinks()!=null&&rp.getAllDrinks().size()>0) {
+						List<Product> dall=rp.getAllDrinks();
 						for(Product d:dall) {
 							U.P(d.toString());
 						}
 					}
 					else {
-						U.p("\nNo hay bebidas que mostrar.");
+						U.P("\nNo hay bebidas que mostrar.");
 					}
+					
 					break;
 					
 				case 10: //ver las comidas
-					List<Product> fall=rp.getAllFoods();
-					if(fall!=null&&fall.size()>0) {
+					if(rp.getAllFoods()!=null&&rp.getAllFoods().size()>0) {
+						List<Product> fall=rp.getAllFoods();
 						for(Product d:fall) {
 							U.P(d.toString());
 						}
 					}
 					else {
-						U.p("\nNo hay comidas que mostrar.");
+						U.P("\nNo hay bebidas que mostrar.");
 					}
+					
 					break;
 				}
 				break;
 			
+			case 5: //DELETE CLIENT
+				if(rc.getAllClients()!=null&&rc.getAllClients().size()>0) {
+					Client c=null;
+					c=uv.chooseClient(rc.getAllClients());
+					rc.getAllClients().remove(c);
+					if(!rc.getAllClients().contains(c)) {
+						U.P("\nSe ha eliminado el producto correctamente de la base de datos.");
+						rc.saveFile();
+					}
+					else {
+						U.P("\nNo se ha podido elminar el cliente.");
+					}
+				}
+				else {
+					U.P("\nNo hay ningún cliente en la base de datos.");
+				}
+				break;
+				
+			case 6:	//DELETE PRODUCT
+				if(rp.getAllProducts()!=null&&rp.getAllProducts().size()>0) {
+					Product p=null;
+					ArrayList<Product> allProduct=(ArrayList<Product>) rp.getAllProducts();
+					p=uv.chooseProduct(allProduct);
+					rp.removeProduct(p);
+					if(!rp.getAllProducts().contains(p)) {
+						U.P("\nSe ha eliminado el producto correctamente de la base de datos.");
+						rp.saveFile();
+					}
+					else {
+						U.P("\nNo se ha podido elminar el producto.");
+					}
+				}
+				else {
+					U.P("\nNo hay ningún producto en la base de datos.");
+				}
+				break;
 			}
 			
 			
