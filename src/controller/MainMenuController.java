@@ -555,8 +555,6 @@ public class MainMenuController implements IMainMenuController{
 					ro.saveFile();
 					rp.saveFile();
 					
-					//prueba sold increment:
-					System.out.println(chart.getLane().get(0).getSold());
 					completed=true;
 				}
 				else {
