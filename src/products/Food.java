@@ -46,8 +46,8 @@ public class Food extends Product implements Serializable{
 		}
 		
 		return super.toString()+ "\n"+
-			   "Para Veganos:   "+vegan+"\n."+
-			   "-------------------------------------------\n";
+			   " Para Veganos:   "+vegan+"\n."+
+			   " -------------------------------------------\n";
 	}
 	
 	@Override

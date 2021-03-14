@@ -13,7 +13,7 @@ public class Generator {
 		// TODO Auto-generated method stub
 		RepositoryProducts rp=RepositoryProducts.instance();
 
-		int n=U.getInt("\nInserte el número de productos que se van a generar");
+		int n=U.getInt("\n Inserte el número de productos que se van a generar");
 		
 		while(n>0) {
 			Product p=generate();
@@ -22,7 +22,7 @@ public class Generator {
 		}
 		
 		rp.saveFile();
-		U.P("\nSe han guardado los datos correctamente.");
+		U.P("\n Se han guardado los datos correctamente.");
 	}
 	
 	public static Product generate() {
@@ -31,36 +31,36 @@ public class Generator {
 		boolean forCeliac=false;
 		boolean vegan=false;
 		boolean alcoholic=false;
-		int type = U.getInt("\nInserte 1 para generar una comida, 2 para una bebida");
+		int type = U.getInt("\n Inserte 1 para generar una comida, 2 para una bebida");
 		while(type<1|type>2) {
-			int option = U.getInt("\nInserte 1 para generar una comida, 2 para una bebida");
+			int option = U.getInt("\n Inserte 1 para generar una comida, 2 para una bebida");
 		}
 		
-		String name=U.getString("\nInserte un nombre");
-		double price=(double)U.getDouble("\nInserte un precio");
+		String name=U.getString("\n Inserte un nombre");
+		double price=(double)U.getDouble("\n Inserte un precio");
 		
-		int option=U.getInt("\n¿Producto para Celiacos? 1 Si, 2 No.");
+		int option=U.getInt("\n ¿Producto para Celiacos? 1 Si, 2 No.");
 		while(option<1|option>2) {
-			option = U.getInt("\nInserte 1 para generar una comida, 2 para una bebida");
+			option = U.getInt("\n Inserte 1 para generar una comida, 2 para una bebida");
 		}
 		if(option==1) {
 			forCeliac=true;
 		}
 		
-		option=U.getInt("\n¿Desea añadir descuentos de BundlePack a este producto? 1 Si, 2 No");
+		option=U.getInt("\n ¿Desea añadir descuentos de BundlePack a este producto? 1 Si, 2 No");
 		while(option<1|option>2) {
-			option = U.getInt("\nInserte 1 o 2");
+			option = U.getInt("\n Inserte 1 o 2");
 		}
 		
 		if(option==1) {
 			boolean continuar=true;
 			while(continuar) {
-				int bp=U.getInt("\nInserte el Id del producto que desea combinar en un BundlePack");
+				int bp=U.getInt("\n Inserte el Id del producto que desea combinar en un BundlePack");
 				bundlePack.add(bp);
 				
-				option=U.getInt("\n¿Desea continuar añadiendo más Id? 1 Si, 2 No");
+				option=U.getInt("\n ¿Desea continuar añadiendo más Id? 1 Si, 2 No");
 				while(option<1|option>2) {
-					option = U.getInt("\nInserte 1 o 2");
+					option = U.getInt("\n Inserte 1 o 2");
 				}
 				
 				if(option==2) {
@@ -70,9 +70,9 @@ public class Generator {
 		}
 		
 		if(type==1) { //COMIDA
-			option=U.getInt("\n¿Producto para veganos? 1 Si, 2 No.");
+			option=U.getInt("\n ¿Producto para veganos? 1 Si, 2 No.");
 			while(option<1|option>2) {
-				option = U.getInt("\nInserte 1 o 2");
+				option = U.getInt("\n Inserte 1 o 2");
 			}
 			if(option==1) {
 				vegan=true;
@@ -89,9 +89,9 @@ public class Generator {
 		
 		
 		else { //BEBIDA
-			option=U.getInt("\n¿Producto con alcohol? 1 Si, 2 No.");
+			option=U.getInt("\n ¿Producto con alcohol? 1 Si, 2 No.");
 			while(option<1|option>2) {
-				option = U.getInt("\nInserte 1 o 2");	
+				option = U.getInt("\n Inserte 1 o 2");	
 			}
 			if(option==1) {
 				alcoholic=true;

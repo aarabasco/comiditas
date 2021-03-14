@@ -61,10 +61,10 @@ public class Client extends Person implements Serializable{
 	@Override
 	public String toString() {
 		return super.toString()+"\n"+
-				"Dirección:       "+this.getAddress()+".\n"+
-				"Puntos:          "+this.getPoints()+".\n"+
-				"Nº de Ordenes:   "+this.getOrders().size()+".\n"+
-				"-------------------------------------------\n";
+				" Dirección:       "+this.getAddress()+".\n"+
+				" Puntos:          "+this.getPoints()+".\n"+
+				" Nº de Ordenes:   "+this.getOrders().size()+".\n"+
+				" -------------------------------------------\n";
 	}
 
 	@Override

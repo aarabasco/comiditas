@@ -68,12 +68,12 @@ public abstract class Product implements IProducto,Serializable,Comparable {
 			bp="Si";
 		}
 		
-		return 	  this.getName()+"\n"+
-			     "-------------------------------------------\n"+
-			     "Id:              "+id+".\n"+
-			     "Precio:          "+String.format("%.1f",this.getPrice())+".\n"+
-			     "BundlePack:      "+bp+".\n"+
-			     "Para Celiacos:   "+Celiac+".";
+		return 	  " "+this.getName()+"\n"+
+			     " -------------------------------------------\n"+
+			     " Id:              "+id+".\n"+
+			     " Precio:          "+String.format("%.1f",this.getPrice())+".\n"+
+			     " BundlePack:      "+bp+".\n"+
+			     " Para Celiacos:   "+Celiac+".";
 
 	}
 	

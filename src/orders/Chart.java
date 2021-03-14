@@ -70,24 +70,23 @@ public class Chart implements Serializable{
 				int total=cant.get(n)+cantidad;
 				cant.add(n, total);
 				cant.remove(n+1);
-				System.out.println("cant despues:"+cant);
 				this.updatePrice();
 				añadido=true;
 			}
 		}
 		if(añadido==false){
-			U.P("\nNo se ha podido añadir el producto al carrito.");
+			U.P("\n No se ha podido añadir el producto al carrito.");
 		}
 	}
 
 	@Override
 	public String toString() {
-		String result = "\n----------Carrito----------\n";
+		String result = "\n ----------Carrito----------\n";
 		for (int i = 0; i < cant.size(); i++) {
-			result += (i + 1) + ". " + lane.get(i).getName() + " --> " + "x " + cant.get(i) + ".\n";
+			result += " "+(i + 1) + ". " + lane.get(i).getName() + " --> " + "x " + cant.get(i) + ".\n";
 		}
-		result+="---------------------------";
-		result += "\nEl total es: " + String.format("%.1f", this.getTotal()) + ".";
+		result+=" ---------------------------";
+		result += "\n El total es: " + String.format("%.1f", this.getTotal()) + ".";
 		return result;
 	}
 
@@ -117,7 +116,6 @@ public class Chart implements Serializable{
 			for(int j=0;j<p.getBundlePack().length;j++) {
 				for(int i=0;i<lane.size();i++) {
 					if(lane.get(i).getId()==p.getBundlePack()[j]) {
-						System.out.println("entro?");return true;
 					}
 				}
 			}

@@ -26,7 +26,7 @@ public class MainMenuController implements IMainMenuController{
 		// TODO Auto-generated method stu
 		File archivo = new File("products.xml");
 		if (!archivo.exists()) {
-		    U.P("No se ha cargado ningún producto. No hay productos que cargar.");
+		    U.P(" No se ha cargado ningún producto. No hay productos que cargar.");
 		}
 		else {
 			rp.loadFile();
@@ -34,7 +34,7 @@ public class MainMenuController implements IMainMenuController{
 		
 		ro.loadFile();
 		rc.loadFile();
-		U.P("¡Bienvenido a la aplicación de Restaurante Comididtas!\n");
+		U.P(" ¡Bienvenido a la aplicación de Restaurante Comididtas!\n");
 			int option=-1;
 		do {
 			option=uv.MainOrderMenu();
@@ -44,7 +44,7 @@ public class MainMenuController implements IMainMenuController{
 			//MAIN MENU CONTROLLER
 			
 			case 0:
-				U.P("\nFin del Programa");
+				U.P("\n Fin del Programa");
 				break;	//SAVE AND EXIT
 			
 			case 1:
@@ -54,11 +54,11 @@ public class MainMenuController implements IMainMenuController{
 			case 2: //CHANGE ORDER MENU
 				
 				int option_Change_Order=U.getInt("\n¿Que desea hacer?\n"+
-					"1. Buscar y modificar una orden por su cliente.\n"+
-					"2. Buscar y modificar una orden por su fecha de encargo.\n"+
-					"Inserte una opción");
+					" 1. Buscar y modificar una orden por su cliente.\n"+
+					" 2. Buscar y modificar una orden por su fecha de encargo.\n"+
+					" Inserte una opción");
 				while(option_Change_Order<1||option>2) {
-					option_Change_Order=U.getInt("\nInserte una opción válida");
+					option_Change_Order=U.getInt("\n Inserte una opción válida");
 				}
 				
 				switch(option_Change_Order) {
@@ -70,23 +70,23 @@ public class MainMenuController implements IMainMenuController{
 					boolean encontrado=false;
 					
 					while(!encontrado) {
-						int option_c=U.getInt("\n1. Buscar por dni.\n"+
-											"2. Buscar por nombre.\n"+
-											"3. Listar todos los clientes.");
+						int option_c=U.getInt("\n 1. Buscar por dni.\n"+
+											" 2. Buscar por nombre.\n"+
+											" 3. Listar todos los clientes.");
 						while(option_c<1||option_c>3) {
-						option=U.getInt("\n¿Inserte una opción válida.");	
+						option=U.getInt("\n ¿Inserte una opción válida.");	
 						}
 						
 						switch(option_c) {
 						case 1:
-							U.P("\nEstás buscando por dni.");
+							U.P("\n Estás buscando por dni.");
 							String dni=uv.search(); //
 							ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
 							c=uv.chooseClient(dnilist);
 							break;
 						
 						case 2:
-							U.P("\nEstás buscando por nombre.");
+							U.P("\n Estás buscando por nombre.");
 							String nombre=uv.search();
 							ArrayList<Client> namelist= rc.searchClientsByName(nombre);
 							c=uv.chooseClient(namelist);
@@ -102,7 +102,7 @@ public class MainMenuController implements IMainMenuController{
 							encontrado=true;
 						}
 						else {
-							U.P("\nNo se ha encontrado el cliente. Inténtelo de nuevo.");
+							U.P("\n No se ha encontrado el cliente. Inténtelo de nuevo.");
 						}
 				}
 				
@@ -110,7 +110,7 @@ public class MainMenuController implements IMainMenuController{
 					mmc.changeOrder(c);
 				}
 				else {
-					U.P("\nEste cliente no tiene ordenes.");
+					U.P("\n Este cliente no tiene ordenes.");
 				}
 				
 				
@@ -123,19 +123,19 @@ public class MainMenuController implements IMainMenuController{
 					
 					LocalDate d=null;
 					do {
-						int year=U.getInt("Inserte el año (ej:2015)");
-						int month=U.getInt("Inserte el mes(ej: 11)");
+						int year=U.getInt(" Inserte el año (ej:2015)");
+						int month=U.getInt(" Inserte el mes(ej: 11)");
 						while(month<1||month>12) {
-							month=U.getInt("Inserte el mes válido (del 01 al 12)");
+							month=U.getInt(" Inserte el mes válido (del 01 al 12)");
 						}
-						int day=U.getInt("Inserte el día para buscar (ej: 03)");
+						int day=U.getInt(" Inserte el día para buscar (ej: 03)");
 						while(day<1||day>31) {
-							month=U.getInt("Inserte un día válido (del 01 al 31)");
+							month=U.getInt(" Inserte un día válido (del 01 al 31)");
 						}
 						
 						d=LocalDate.of(year, month,day);
 						if(d==null) {
-							U.P("\nNo se ha podido especificar su fecha. Indíquela de nuevo.");
+							U.P("\n No se ha podido especificar su fecha. Indíquela de nuevo.");
 						}
 					}while(d==null);
 					
@@ -151,10 +151,10 @@ public class MainMenuController implements IMainMenuController{
 			case 3: //DELETE ORDER MENU
 				
 				int option_Delete_order=-1;
-				option_Delete_order=U.getInt("\n¿Que desea hacer?\n"+
-					"1. Buscar y eliminar una orden por su cliente.\n"+
-					"2. Buscar y eliminar una orden por su fecha de encargo.\n"+
-					"Inserte una opción");
+				option_Delete_order=U.getInt("\n ¿Que desea hacer?\n"+
+					" 1. Buscar y eliminar una orden por su cliente.\n"+
+					" 2. Buscar y eliminar una orden por su fecha de encargo.\n"+
+					" Inserte una opción");
 				while(option_Delete_order<1||option_Delete_order>2) {
 					option_Delete_order=U.getInt("Inserte una opción válida");
 				}
@@ -166,23 +166,23 @@ public class MainMenuController implements IMainMenuController{
 						boolean encontrado=false;
 						
 						while(!encontrado) {
-							int option_c=U.getInt("\n1. Buscar por dni.\n"+
-												"2. Buscar por nombre.\n"+
-												"3. Listar todos los clientes.");
+							int option_c=U.getInt("\n 1. Buscar por dni.\n"+
+												" 2. Buscar por nombre.\n"+
+												" 3. Listar todos los clientes.");
 							while(option_c<1||option_c>3) {
-							option=U.getInt("\n¿Inserte una opción válida.");	
+							option=U.getInt("\n ¿Inserte una opción válida.");	
 							}
 							
 							switch(option_c) {
 							case 1:
-								U.P("\nEstás buscando por dni.");
+								U.P("\n Estás buscando por dni.");
 								String dni=uv.search(); //
 								ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
 								c=uv.chooseClient(dnilist);
 								break;
 							
 							case 2:
-								U.P("\nEstás buscando por nombre.");
+								U.P("\n Estás buscando por nombre.");
 								String nombre=uv.search();
 								ArrayList<Client> namelist= rc.searchClientsByName(nombre);
 								c=uv.chooseClient(namelist);
@@ -198,7 +198,7 @@ public class MainMenuController implements IMainMenuController{
 								encontrado=true;
 							}
 							else {
-								U.P("\nNo se ha encontrado el cliente. Inténtelo de nuevo.");
+								U.P("\n No se ha encontrado el cliente. Inténtelo de nuevo.");
 							}
 					}
 					
@@ -206,7 +206,7 @@ public class MainMenuController implements IMainMenuController{
 						mmc.deleteOrder(c);
 					}
 					else {
-						U.P("\nEste cliente no tiene ordenes.");
+						U.P("\n Este cliente no tiene ordenes.");
 					}
 					
 					
@@ -216,19 +216,19 @@ public class MainMenuController implements IMainMenuController{
 					
 					LocalDate d=null;
 					do {
-						int year=U.getInt("Inserte el año (ej:2015)");
-						int month=U.getInt("Inserte el mes(ej: 11)");
+						int year=U.getInt("\n Inserte el año (ej:2015)");
+						int month=U.getInt("\n Inserte el mes(ej: 11)");
 						while(month<1||month>12) {
-							month=U.getInt("Inserte el mes válido (del 01 al 12)");
+							month=U.getInt("\n Inserte el mes válido (del 01 al 12)");
 						}
-						int day=U.getInt("Inserte el día para buscar (ej: 03)");
+						int day=U.getInt("\n Inserte el día para buscar (ej: 03)");
 						while(day<1||day>31) {
-							month=U.getInt("Inserte un día válido (del 01 al 31)");
+							month=U.getInt("\n Inserte un día válido (del 01 al 31)");
 						}
 						
 						d=LocalDate.of(year, month,day);
 						if(d==null) {
-							U.P("\nNo se ha podido especificar su fecha. Indíquela de nuevo.");
+							U.P("\n No se ha podido especificar su fecha. Indíquela de nuevo.");
 						}
 					}while(d==null);
 					
@@ -242,19 +242,19 @@ public class MainMenuController implements IMainMenuController{
 			
 				
 			case 4://DATABASEMENU
-				int dbo=U.getInt("\nSe mostrará información detallada de lo que indiques.\n"+
-								 "1. Mostrar todo lo recaudado.\n"+
-								 "2. Mostrar el dinero recaudado hoy.\n"+
-								 "3. Mostrar el dinero recaudado este mes.\n"+
-								 "4. Mostrar todas las ordenes.\n"+
-								 "5. Mostrar todas las ordenes no pagadas.\n"+
-								 "6. Mostrar todas las ordenes no entregadas.\n"+
-								 "7. Mostrar todos los clientes.\n"+
-								 "8. Mostrar todos los productos.\n"+
-								 "9. Mostrar todas las bebidas.\n"+
-								 "10. Mostrar todas las comidas.\n");
+				int dbo=U.getInt("\n Se mostrará información detallada de lo que indiques.\n"+
+								 " 1. Mostrar todo lo recaudado.\n"+
+								 " 2. Mostrar el dinero recaudado hoy.\n"+
+								 " 3. Mostrar el dinero recaudado este mes.\n"+
+								 " 4. Mostrar todas las ordenes.\n"+
+								 " 5. Mostrar todas las ordenes no pagadas.\n"+
+								 " 6. Mostrar todas las ordenes no entregadas.\n"+
+								 " 7. Mostrar todos los clientes.\n"+
+								 " 8. Mostrar todos los productos.\n"+
+								 " 9. Mostrar todas las bebidas.\n"+
+								 " 10. Mostrar todas las comidas.\n");
 				while(dbo<1||dbo>10) {
-					dbo=U.getInt("\nInserte una opción válida");
+					dbo=U.getInt("\n Inserte una opción válida");
 				}
 				
 				switch(dbo) {
@@ -290,7 +290,7 @@ public class MainMenuController implements IMainMenuController{
 							}
 					}
 					else {
-						U.P("\nNo hay clientes que mostrar.");
+						U.P("\n No hay clientes que mostrar.");
 					}
 					break;
 					
@@ -315,7 +315,7 @@ public class MainMenuController implements IMainMenuController{
 						}
 					}
 					else {
-						U.P("\nNo hay bebidas que mostrar.");
+						U.P("\n No hay bebidas que mostrar.");
 					}
 					
 					break;
@@ -328,7 +328,7 @@ public class MainMenuController implements IMainMenuController{
 						}
 					}
 					else {
-						U.P("\nNo hay bebidas que mostrar.");
+						U.P("\n No hay bebidas que mostrar.");
 					}
 					
 					break;
@@ -341,15 +341,15 @@ public class MainMenuController implements IMainMenuController{
 					c=uv.chooseClient(rc.getAllClients());
 					rc.getAllClients().remove(c);
 					if(!rc.getAllClients().contains(c)) {
-						U.P("\nSe ha eliminado el producto correctamente de la base de datos.");
+						U.P("\n Se ha eliminado el producto correctamente de la base de datos.");
 						rc.saveFile();
 					}
 					else {
-						U.P("\nNo se ha podido elminar el cliente.");
+						U.P("\n No se ha podido elminar el cliente.");
 					}
 				}
 				else {
-					U.P("\nNo hay ningún cliente en la base de datos.");
+					U.P("\n No hay ningún cliente en la base de datos.");
 				}
 				break;
 				
@@ -360,15 +360,15 @@ public class MainMenuController implements IMainMenuController{
 					p=uv.chooseProduct(allProduct);
 					rp.removeProduct(p);
 					if(!rp.getAllProducts().contains(p)) {
-						U.P("\nSe ha eliminado el producto correctamente de la base de datos.");
+						U.P("\n Se ha eliminado el producto correctamente de la base de datos.");
 						rp.saveFile();
 					}
 					else {
-						U.P("\nNo se ha podido elminar el producto.");
+						U.P("\n No se ha podido elminar el producto.");
 					}
 				}
 				else {
-					U.P("\nNo hay ningún producto en la base de datos.");
+					U.P("\n No hay ningún producto en la base de datos.");
 				}
 				break;
 			}
@@ -397,25 +397,25 @@ public class MainMenuController implements IMainMenuController{
 		else {
 			boolean encontrado=false;
 			while(!encontrado) {
-				int option=U.getInt("\n0. Cancelar búsqueda.\n"+
-						 			"1. Buscar por dni.\n"+
-									"2. Buscar por nombre.\n"+
-									"3. Listar todos los clientes.");
+				int option=U.getInt("\n 0. Cancelar búsqueda.\n"+
+						 			" 1. Buscar por dni.\n"+
+									" 2. Buscar por nombre.\n"+
+									" 3. Listar todos los clientes.");
 				while(option<0||option>3) {
-				option=U.getInt("\n¿Inserte una opción válida.");	
+				option=U.getInt("\n ¿Inserte una opción válida.");	
 				}
 				
 				if(option!=0) {
 					switch(option) {
 					case 1:
-						U.P("\nEstás buscando por dni.");
+						U.P("\n Estás buscando por dni.");
 						String dni=uv.search(); //
 						ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
 						c=uv.chooseClient(dnilist);
 						break;
 					
 					case 2:
-						U.P("\nEstás buscando por nombre.");
+						U.P("\n Estás buscando por nombre.");
 						String nombre=uv.search();
 						ArrayList<Client> namelist= rc.searchClientsByName(nombre);
 						c=uv.chooseClient(namelist);
@@ -431,12 +431,12 @@ public class MainMenuController implements IMainMenuController{
 						encontrado=true;
 					}
 					else {
-						U.P("\nNo se ha encontrado el cliente. Inténtelo de nuevo.");
+						U.P("\n No se ha encontrado el cliente. Inténtelo de nuevo.");
 					}
 				}
 				else {
 					c=null;
-					U.p("\nSe ha cancelado la búsqeda");
+					U.p("\n Se ha cancelado la búsqeda");
 					encontrado=true;
 				}
 			}
@@ -459,7 +459,7 @@ public class MainMenuController implements IMainMenuController{
 			switch (option) {
 
 			case 0:
-				U.P("\nSe ha cancelado su pedido. Volviendo al menú principal.");
+				U.P("\n Se ha cancelado su pedido. Volviendo al menú principal.");
 				completed=true;
 				break;
 			
@@ -467,10 +467,10 @@ public class MainMenuController implements IMainMenuController{
 				result=omc.addProduct(chart);
 				
 				if(result) {
-					U.P("\nEl producto se ha añadido correctamente al carrito.");
+					U.P("\n El producto se ha añadido correctamente al carrito.");
 				}
 				else {
-					U.P("\nNo se ha podido añadir tu producto al carrito.");
+					U.P("\n No se ha podido añadir tu producto al carrito.");
 				}
 				
 				break;
@@ -481,11 +481,11 @@ public class MainMenuController implements IMainMenuController{
 					result=omc.editLine(chart);	
 				}
 				else {
-					U.P("\nNo hay ninguna línea que editar.");
+					U.P("\n No hay ninguna línea que editar.");
 				}
 				
 				if(result) {
-					U.p("\nSe ha editado la linea correctamente.");
+					U.p("\n Se ha editado la linea correctamente.");
 				}
 				break;
 				
@@ -494,14 +494,14 @@ public class MainMenuController implements IMainMenuController{
 				if(chart.getLane().size()>0) {
 					result= omc.removeLine(chart);
 					if(result) {
-						U.P("\nSe ha eliminado la linea correctamente.");
+						U.P("\n Se ha eliminado la linea correctamente.");
 					}
 					else {
-						U.P("\nNo se ha podido eliminar la linea.");
+						U.P("\n No se ha podido eliminar la linea.");
 					}
 				}
 				else{
-					U.P("\nNo hay ninguna linea que eliminar.");
+					U.P("\n No hay ninguna linea que eliminar.");
 				}
 				break;
 				
@@ -510,14 +510,14 @@ public class MainMenuController implements IMainMenuController{
 					result=omc.setAdress(c);
 					if(result&&c.getAddress()!=null) {
 						a=c.getAddress();
-						U.P("\nSe ha insertado correctamente la dirección de envio.\n");
+						U.P("\n Se ha insertado correctamente la dirección de envio.\n");
 					}
 					else {
-						U.P("\nNo se ha podido insertar correctamente la dirección de envio.\n");
+						U.P("\n No se ha podido insertar correctamente la dirección de envio.\n");
 					}
 				}
 				else {
-					U.P("\nNo se ha podido insertar la dirección, no hay ningún cliente.\n");
+					U.P("\n No se ha podido insertar la dirección, no hay ningún cliente.\n");
 				}
 				
 				break;
@@ -536,20 +536,20 @@ public class MainMenuController implements IMainMenuController{
 				ArrayList<Product> productos=chart.ChartToOrder();
 				Order o=new Order(c,productos ,chart.getTotal(), ldc, a, chart, false, payed);
 				if(payed=true) {
-					U.P("\nSe ha guardado la orden correctamente como pagada.");
+					U.P("\n Se ha guardado la orden correctamente como pagada.");
 				}
 				else {
-					U.P("\nSe ha guardado la orden correctamente como no pagada.");
+					U.P("\n Se ha guardado la orden correctamente como no pagada.");
 				}
 				result=ro.addOrder(o);
 				if(result) {
 					if(!rc.getAllClients().contains(c)) {
 						rc.getAllClients().add(c);
 					}
-					U.P("\nSe ha añadido la orden completamente.");
+					U.P("\n Se ha añadido la orden completamente.");
 					c.getOrders().add(o);
 					rc.saveFile();
-					U.P("\nSu orden es la siguiente: "+o);
+					U.P("\n Su orden es la siguiente: "+o);
 
 					rp.updateProductsInfo(chart);
 					
@@ -559,12 +559,12 @@ public class MainMenuController implements IMainMenuController{
 					completed=true;
 				}
 				else {
-					U.P("\nNo se ha podido añadir tu orden, ya existe una orden con este código.");
+					U.P("\n No se ha podido añadir tu orden, ya existe una orden con este código.");
 				}
 				completed=true;
 			}
 			else if(option>=5){
-				U.P("\nDebe rellenar todos los campos:");
+				U.P("\n Debe rellenar todos los campos:");
 				omc.comprobarcampos(c, chart, chart.getLane().size(), a);
 			}
 		}while(!completed);
@@ -593,17 +593,17 @@ public class MainMenuController implements IMainMenuController{
 					delivered="Si.";
 				}
 				
-				int option=U.getInt("\n¿Qué desea modificar?\n"+
-									"1. Dirección de envio: "+order_to_change.getAdress()+".\n"+
-									"2. Pagado: "+payed+"\n"+
-									"2. Entregado: "+delivered+"\n");
+				int option=U.getInt("\n ¿Qué desea modificar?\n"+
+									" 1. Dirección de envio: "+order_to_change.getAdress()+".\n"+
+									" 2. Pagado: "+payed+"\n"+
+									" 2. Entregado: "+delivered+"\n");
 				while(option<1||option>3) {
-					option=U.getInt("\nInserte una opción válida");
+					option=U.getInt("\n Inserte una opción válida");
 				}
 				
 				switch(option) {
 				case 1:
-					order_to_change.setAdress(U.getString("\nInserte la dirección de envío"));
+					order_to_change.setAdress(U.getString("\n Inserte la dirección de envío"));
 					break;
 				
 				case 2:
@@ -613,7 +613,7 @@ public class MainMenuController implements IMainMenuController{
 					}else {
 						order_to_change.setPayed(false);
 					}
-					U.P("\nSe ha modificado correctamente el estado del pago de la orden.");
+					U.P("\n Se ha modificado correctamente el estado del pago de la orden.");
 					break;
 				
 				default:
@@ -622,17 +622,17 @@ public class MainMenuController implements IMainMenuController{
 					}else {
 						order_to_change.setDelivered(false);
 					}
-					U.P("\nSe ha modificado correctamente el estado de entrega de la orden.");
+					U.P("\n Se ha modificado correctamente el estado de entrega de la orden.");
 					break;
 				}
 				
-				option=U.getInt("¿Desea continuar? 1 Si, 2 No");
+				option=U.getInt(" ¿Desea continuar? 1 Si, 2 No");
 				while(option<1||option>2) {
 					option=U.getInt("\nInserte una opción válida");
 				}
 				if(option==2) {
 					completed=true;
-					U.P("Su orden ha sido modificada\n"+
+					U.P("\n Su orden ha sido modificada\n"+
 						order_to_change.toString());
 				}
 			}while(!completed);		
@@ -668,16 +668,16 @@ public class MainMenuController implements IMainMenuController{
 				}
 				
 				int option=U.getInt("\n¿Qué desea modificar?\n"+
-									"1. Dirección de envio: "+order_to_change.getAdress()+".\n"+
-									"2. Pagado: "+payed+"\n"+
-									"2. Entregado: "+delivered+"\n");
+									" 1. Dirección de envio: "+order_to_change.getAdress()+".\n"+
+									" 2. Pagado: "+payed+"\n"+
+									" 2. Entregado: "+delivered+"\n");
 				while(option<1||option>3) {
-					option=U.getInt("\nInserte una opción válida");
+					option=U.getInt("\n Inserte una opción válida");
 				}
 				
 				switch(option) {
 				case 1:
-					order_to_change.setAdress(U.getString("\nInserte la dirección de envío"));
+					order_to_change.setAdress(U.getString("\n Inserte la dirección de envío"));
 					break;
 				
 				case 2:
@@ -687,7 +687,7 @@ public class MainMenuController implements IMainMenuController{
 					}else {
 						order_to_change.setPayed(false);
 					}
-					U.P("\nSe ha modificado correctamente el estado del pago de la orden.");
+					U.P("\n Se ha modificado correctamente el estado del pago de la orden.");
 					break;
 				
 				default:
@@ -696,17 +696,17 @@ public class MainMenuController implements IMainMenuController{
 					}else {
 						order_to_change.setDelivered(false);
 					}
-					U.P("\nSe ha modificado correctamente el estado de entrega de la orden.");
+					U.P("\n Se ha modificado correctamente el estado de entrega de la orden.");
 					break;
 				}
 				
-				option=U.getInt("¿Desea continuar? 1 Si, 2 No");
+				option=U.getInt(" ¿Desea continuar? 1 Si, 2 No");
 				while(option<1||option>2) {
-					option=U.getInt("\nInserte una opción válida");
+					option=U.getInt("\n Inserte una opción válida");
 				}
 				if(option==2) {
 					completed=true;
-					U.P("Su orden ha sido modificada\n"+
+					U.P(" Su orden ha sido modificada\n"+
 						order_to_change.toString());
 				}
 			}while(!completed);		
@@ -729,14 +729,14 @@ public class MainMenuController implements IMainMenuController{
 			U.P(order_to_delete.toString());
 			
 			if(order_to_delete!=null) {
-				int option=U.getInt("\n¿Está seguro de que desea eliminar la orden? 1 para eliminar, 2 para cancelar");
+				int option=U.getInt("\n ¿Está seguro de que desea eliminar la orden? 1 para eliminar, 2 para cancelar");
 				while(option<1||option>2) {
-					option=U.getInt("\nInserte una opción válida");
+					option=U.getInt("\n Inserte una opción válida");
 				}
 				
 				if(option==1) {
 					ro.getAllOrder().remove(order_to_delete);
-					U.p("\nSe ha elminado correctamente su orden\n.");
+					U.p("\n Se ha elminado correctamente su orden\n.");
 					ro.saveFile();
 				}
 			}
@@ -751,21 +751,21 @@ public class MainMenuController implements IMainMenuController{
 		order_to_delete=uv.chooseOrder(orders_of_this_client);
 		
 		if(order_to_delete!=null) {
-			int option=U.getInt("\n¿Está seguro de que desea eliminar la orden? 1 para eliminar, 2 para cancelar");
+			int option=U.getInt("\n ¿Está seguro de que desea eliminar la orden? 1 para eliminar, 2 para cancelar");
 			while(option<1||option>2) {
-				option=U.getInt("\nInserte una opción válida");
+				option=U.getInt("\n Inserte una opción válida");
 			}
 			
 			if(option==1) {
 				ro.getAllOrder().remove(order_to_delete);
-				U.p("\nSe ha elminado correctamente su orden\n.");
+				U.p("\n Se ha elminado correctamente su orden\n.");
 				ro.saveFile();
 				rc.saveFile();
 				rp.saveFile();
 			}
 		}
 		else {
-			U.P("\nNo se ha encontrado ninguna orden con esos datos.");
+			U.P("\n No se ha encontrado ninguna orden con esos datos.");
 		}
 		
 	}
@@ -783,7 +783,7 @@ public class MainMenuController implements IMainMenuController{
 			}	
 		}
 		
-		U.P("\nEl total ganado hoy es de "+String.format("%.1f", cashToday)+" Euros.");
+		U.P("\n El total ganado hoy es de "+String.format("%.1f", cashToday)+" Euros.");
 		
 	}
 
@@ -800,7 +800,7 @@ public class MainMenuController implements IMainMenuController{
 			}
 		}
 		
-		U.P("\nEl total ganado este mes es "+String.format("%.1f", cashMonth)+" Euros.");
+		U.P("\n El total ganado este mes es "+String.format("%.1f", cashMonth)+" Euros.");
 		
 	}
 
@@ -811,7 +811,7 @@ public class MainMenuController implements IMainMenuController{
 			cashTotal+=o.getTotal();
 		}
 		
-		U.P("\nEl total recaudado es de "+String.format("%.1f", cashTotal)+" Euros.");
+		U.P("\n El total recaudado es de "+String.format("%.1f", cashTotal)+" Euros.");
 	}
 
 	public void viewAllOrders() {
@@ -819,7 +819,7 @@ public class MainMenuController implements IMainMenuController{
 		if(all_orders!=null&&all_orders.size()>0) {
 			for(Order o:all_orders) {
 				if(o!=null) {
-					U.P(o.toString()+"\n");
+					U.P(" "+o.toString()+"\n");
 				}
 				
 			}
@@ -827,7 +827,7 @@ public class MainMenuController implements IMainMenuController{
 		
 			
 		else if(all_orders==null||all_orders.size()<1) {
-			U.P("\nNo hay ninguna orden que mostrar.");
+			U.P("\n No hay ninguna orden que mostrar.");
 		}
 	}
 	
@@ -837,7 +837,7 @@ public class MainMenuController implements IMainMenuController{
 		if(orders_not_payed!=null&&orders_not_payed.size()>0) {
 			for(Order o:orders_not_payed) {
 				if(o!=null) {
-					U.P(o.toString()+"\n");
+					U.P(" "+o.toString()+"\n");
 				}
 				
 			}
@@ -845,7 +845,7 @@ public class MainMenuController implements IMainMenuController{
 		
 			
 		else if(orders_not_payed==null||orders_not_payed.size()<1) {
-			U.P("\nNo hay ninguna orden que mostrar.");
+			U.P("\n No hay ninguna orden que mostrar.");
 		}
 	}
 

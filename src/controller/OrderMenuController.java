@@ -23,9 +23,9 @@ public class OrderMenuController implements IOrderMenuController {
 			int cantidad = -1;
 			boolean encontrado = false;
 			while (!encontrado) {
-				int option=U.getInt("\nPulse 1 para buscar un producto, 2 para listarlos todos y seleccionarlo");
+				int option=U.getInt("\n Pulse 1 para buscar un producto, 2 para listarlos todos y seleccionarlo");
 				while(option<1||option>2) {
-					option=U.getInt("\nInserte una opción válida.");
+					option=U.getInt("\n Inserte una opción válida.");
 				}
 				
 				if(option==1) {
@@ -33,39 +33,39 @@ public class OrderMenuController implements IOrderMenuController {
 					ArrayList<Product> plist = (ArrayList)rp.searchProducts(nombre);
 					p = uv.chooseProduct(plist);
 					if (p != null) {
-						U.p("\nHa añadido el siguiente producto al carrito:\n"+
+						U.p("\n Ha añadido el siguiente producto al carrito:\n"+
 							p.toString());
 						encontrado = true;
 					}
 					else {
-						U.P("\nNo se ha encontrado el producto. Inténtelo de nuevo.");
+						U.P("\n No se ha encontrado el producto. Inténtelo de nuevo.");
 					}
 				}
 				else {
 					p = uv.chooseProduct((ArrayList<Product>) rp.getAllProducts());
 					if (p != null) {
-						U.p("\nHa añadido el siguiente producto al carrito:\n"+
+						U.p("\n Ha añadido el siguiente producto al carrito:\n"+
 							p.toString());
 						encontrado = true;
 					}
 					else {
-						U.P("\nNo se ha encontrado el producto. Inténtelo de nuevo.");
+						U.P("\n No se ha encontrado el producto. Inténtelo de nuevo.");
 					}
 				}
 				
 			}
 
 			while (cantidad < 1) {
-				cantidad = U.getInt("\nInserte cantidad a añadir");
+				cantidad = U.getInt("\n Inserte cantidad a añadir");
 			}
 
 			c.addProducttoChart(p, cantidad);
 			result = true;
 		}
 		else {
-			U.p("No hay productos que añadir. Debes crear al menos uno:");
+			U.p("\n  No hay productos que añadir. Debes crear al menos uno:");
 			Generator g=new Generator();
-			int n=U.getInt("¿Cuantos productos deseas generar?");
+			int n=U.getInt("\n ¿Cuantos productos deseas generar?");
 			while(n>0) {
 				g.generate();
 			}
@@ -81,16 +81,16 @@ public class OrderMenuController implements IOrderMenuController {
 		int option=-1;
 		
 		while(chart!=null&&chart.getLane().size()>0&&continuar) {			
-			int lane=U.getInt("\nInserte la línea que desea editar de las siguientes en su carrito:\n"+
+			int lane=U.getInt("\n Inserte la línea que desea editar de las siguientes en su carrito:\n"+
 					chart.toString())-1;
 			while(lane<0||lane>chart.getLane().size()-1) {
-				lane=U.getInt("\nInserte una opción válida")-1;
+				lane=U.getInt("\n Inserte una opción válida")-1;
 			}
 			
-			U.P("\nEstá modificando el siguiente producto:\n"+
+			U.P("\n Está modificando el siguiente producto:\n"+
 				chart.getLane().get(lane).toString()+"\n");
 			
-			int cantidad=U.getInt("\nInserte la cantidad que desea comprar de ese producto");
+			int cantidad=U.getInt("\n Inserte la cantidad que desea comprar de ese producto");
 			
 			if(cantidad>0) {
 				chart.getCant().add(lane,cantidad);
@@ -100,10 +100,10 @@ public class OrderMenuController implements IOrderMenuController {
 			}
 			
 			else {
-				option=U.getInt("\nLa cantidad que ha añadido de este producto es 0. ¿Quiere eliminar esta línea?\n"+
-								"Inserte 1 para eliminar, 0 para cancelar");
+				option=U.getInt("\n La cantidad que ha añadido de este producto es 0. ¿Quiere eliminar esta línea?\n"+
+								" Inserte 1 para eliminar, 0 para cancelar");
 				while(option<0||option>1) {
-					option=U.getInt("\nInserte una opción válida. Pulse 1 para eliminar, 0 para cancelar.");
+					option=U.getInt("\n Inserte una opción válida. Pulse 1 para eliminar, 0 para cancelar.");
 				}
 				
 				if(option==1) {
@@ -115,13 +115,13 @@ public class OrderMenuController implements IOrderMenuController {
 			}
 			
 			if(chart.getLane().size()>0) {
-				U.p("El carrito actualmente es el siguiente:\n"+
+				U.p(" El carrito actualmente es el siguiente:\n"+
 					chart.toString());
 			}
 			
-			option=U.getInt("\n¿Desea continuar editando alguna línea? Pulse 1 para continuar, 0 para salir");
+			option=U.getInt("\n ¿Desea continuar editando alguna línea? Pulse 1 para continuar, 0 para salir");
 			while(option<0||option>1) {
-				option=U.getInt("\nInserte una opción válida. Pulse 1 para continuar, 0 para salir");
+				option=U.getInt("\n Inserte una opción válida. Pulse 1 para continuar, 0 para salir");
 			}
 			if(option==0) {
 				continuar=false;
@@ -130,7 +130,7 @@ public class OrderMenuController implements IOrderMenuController {
 		}
 		
 		if(chart.getLane().size()<1) {
-			U.p("\nNo hay ninguna línea que editar. Añada algún producto al carrito.");
+			U.p("\n No hay ninguna línea que editar. Añada algún producto al carrito.");
 		}
 
 		return result;
@@ -145,17 +145,17 @@ public class OrderMenuController implements IOrderMenuController {
 				do {
 					U.P(chart.toString());
 					
-					int lane=U.getInt("Inserte la línea que desea eliminar")-1;
+					int lane=U.getInt("\n Inserte la línea que desea eliminar")-1;
 					while(lane<0||lane>chart.getLane().size()-1) {
-						lane=U.getInt("\nInserte una línea válida")-1;
+						lane=U.getInt("\n Inserte una línea válida")-1;
 					}
 					
-					U.P("\nVa a eliminar el siguiente producto:\n"+
+					U.P("\n Va a eliminar el siguiente producto:\n"+
 							chart.getLane().get(lane).toString()+"\n");
-					int option=U.getInt("¿Seguro que desea eliminar la línea?\n"+
-										"Inserte 1 para eliminar, 0 para cancelar");
+					int option=U.getInt(" ¿Seguro que desea eliminar la línea?\n"+
+										" Inserte 1 para eliminar, 0 para cancelar");
 					while(option<0||option>1) {
-						option=U.getInt("\nInserte una opción válida");
+						option=U.getInt("\n Inserte una opción válida");
 					}
 					
 					if(option==1) {
@@ -171,21 +171,21 @@ public class OrderMenuController implements IOrderMenuController {
 					}
 					
 					U.p(chart.toString());
-					option=U.getInt("¿Desea continuar eliminando líneas?\n"+
-									"Pulse 1 para continuar, 0 para salir");
+					option=U.getInt(" ¿Desea continuar eliminando líneas?\n"+
+									" Pulse 1 para continuar, 0 para salir");
 					while(option<0||option>1) {
-						option=U.getInt("\nInserte una opción válida");
+						option=U.getInt("\n Inserte una opción válida");
 					}
 					if(option==0||chart.getLane().size()<1) {
 						continuar=false;
 						if(chart.getLane().size()<1) {
-							U.p("\nNo hay más lineas que eliminar.");
+							U.p("\n No hay más lineas que eliminar.");
 						}
 					}
 				}while(continuar);
 			}
 			else {
-				U.P("\nNo hay más lineas que eliminar.");
+				U.P("\n No hay más lineas que eliminar.");
 			}
 				
 		}
@@ -196,7 +196,7 @@ public class OrderMenuController implements IOrderMenuController {
 	public boolean setAdress(Client c) {
 		boolean result=false;
 		if(c!=null) {
-			String adress=U.getString("Inserte la dirección del envio del pedido");
+			String adress=U.getString(" Inserte la dirección del envio del pedido");
 			if(adress!=null) {
 				c.setAddress(adress);
 				result=true;
@@ -220,21 +220,21 @@ public class OrderMenuController implements IOrderMenuController {
 
 	public void comprobarcampos(Client c, Chart chart, int size, String a) {
 		if(c!=null&&chart!=null&&size>0&&a!=null) {
-			U.P("\nTodos los campos están introducidos correctamente.");
+			U.P("\n Todos los campos están introducidos correctamente.");
 		}
 		else {
 			String result="";
 			if(c==null) {
-				result+="\n-Debe insertar un cliente.";
+				result+="\n -Debe insertar un cliente.";
 			}
 			if(chart==null) {
-				result+="\n-No se ha creado un carrito.";
+				result+="\n -No se ha creado un carrito.";
 			}
 			if(size<1) {
-				result+="\n-No hay ningún producto en el carrito. Inserte al menos uno.";
+				result+="\n -No hay ningún producto en el carrito. Inserte al menos uno.";
 			}
 			if(a==null) {
-				result+="\n-No ha insertado ninguna dirección de envio, inserte una.";
+				result+="\n -No ha insertado ninguna dirección de envio, inserte una.";
 			}
 			result+="\n";
 			U.P(result);

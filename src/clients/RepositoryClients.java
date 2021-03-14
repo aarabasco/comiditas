@@ -130,7 +130,7 @@ public class RepositoryClients implements Serializable{
 			clients=(ArrayList<Client>)oi.readObject();
 			oi.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("No se han encontrado Client.dat");
+			System.out.println("\n No se ha cargado ningún cliente. No hay clientes que cargar.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -146,7 +146,7 @@ public class RepositoryClients implements Serializable{
 			oo.flush();
 			oo.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("\nNo se ha cargado ningún cliente. No hay clientes que cargar.");
+			System.out.println("\n No se ha cargado ningún cliente. No hay clientes que cargar.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -146,16 +146,16 @@ public class Order implements Serializable{
 			pagado="Si";
 		}
 		
-		return "\nOrder nº"+id+"\n"+
-			     "-------------------------------------------\n"+
-			     "Cliente:         "+cliente.getName()+".\n"+
-			     "DNI del Cliente: "+cliente.getDni()+".\n"+
-				 "Dirección:       "+adress+".\n"+
-				 "Fecha:           "+fecha+".\n"+
-				 "Entregado:       "+entregado+".\n"+
-				 "Pagado:          "+pagado+".\n"+
-				 "-------------------------------------------\n"+
-				 "Total:           "+String.format("%.1f", total)+".\n";
+		return "\n Order nº"+id+"\n"+
+			     " -------------------------------------------\n"+
+			     " Cliente:         "+cliente.getName()+".\n"+
+			     " DNI del Cliente: "+cliente.getDni()+".\n"+
+				 " Dirección:       "+adress+".\n"+
+				 " Fecha:           "+fecha+".\n"+
+				 " Entregado:       "+entregado+".\n"+
+				 " Pagado:          "+pagado+".\n"+
+				 " -------------------------------------------\n"+
+				 " Total:           "+String.format("%.1f", total)+".\n";
 	}
 
 	@Override

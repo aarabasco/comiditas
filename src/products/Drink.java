@@ -46,8 +46,8 @@ public class Drink extends Product implements Serializable{
 		}
 		
 		return super.toString()+ "\n"+
-			   "Contiene Alcohol:   "+alcoholic+"\n."+
-			   "-------------------------------------------\n";
+			   " Contiene Alcohol:   "+alcoholic+"\n."+
+			   " -------------------------------------------\n";
 	}
 	@Override
 	public int compareTo(Object o) {
