@@ -34,7 +34,7 @@ public class MainMenuController implements IMainMenuController{
 		
 		ro.loadFile();
 		rc.loadFile();
-		U.P("¡Bienvenido a la aplicación de Muslitos_Picantes!\n");
+		U.P("¡Bienvenido a la aplicación de Restaurante Comididtas!\n");
 			int option=-1;
 		do {
 			option=uv.MainOrderMenu();

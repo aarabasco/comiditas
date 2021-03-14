@@ -7,10 +7,6 @@ import orders.Order;
 import products.Product;
 
 public class uv {
-	public static void inicio() {
-		//imprime un mensaje al inicio del programa
-	}
-
 	public static boolean usarcliente() {
 		// TODO Auto-generated method stub
 		int option=0;
@@ -58,7 +54,6 @@ public class uv {
 	}
 	
 	public static boolean validarDNI(String dni) {
-		boolean result=false;
 		
 		if(dni.matches("[0-9]{8}[a-zA-Z]")) {
 			return true;
