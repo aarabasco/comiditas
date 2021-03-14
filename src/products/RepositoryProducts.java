@@ -23,17 +23,17 @@ import java.util.Iterator;
 
 @XmlRootElement(name="repository")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ProductRepository {
+public class RepositoryProducts {
 	private List<Product> products;
-	private static ProductRepository productRepository;
+	private static RepositoryProducts productRepository;
 	
-	private ProductRepository(){
+	private RepositoryProducts(){
 		products=new ArrayList<Product>();
 	}
 
-	public static ProductRepository instance(){
+	public static RepositoryProducts instance(){
 		if(productRepository==null){
-			productRepository=new ProductRepository();
+			productRepository=new RepositoryProducts();
 		}
 		return productRepository;
 	}
@@ -203,7 +203,7 @@ public class ProductRepository {
 	public void saveFile(){
 		JAXBContext jaxbC;
 		try {
-			jaxbC=JAXBContext.newInstance(ProductRepository.class);
+			jaxbC=JAXBContext.newInstance(RepositoryProducts.class);
 			Marshaller m = jaxbC.createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			m.marshal(productRepository, new File("products.xml"));
@@ -215,9 +215,9 @@ public class ProductRepository {
 	public void loadFile(){
 		JAXBContext jaxbC;
 		try {
-			jaxbC=JAXBContext.newInstance(ProductRepository.class);
+			jaxbC=JAXBContext.newInstance(RepositoryProducts.class);
 			Unmarshaller um = jaxbC.createUnmarshaller();
-			ProductRepository r=(ProductRepository)um.unmarshal(new File("products.xml"));
+			RepositoryProducts r=(RepositoryProducts)um.unmarshal(new File("products.xml"));
 			for(Product i:r.getAllProducts()){
 				addProduct(i);
 			}

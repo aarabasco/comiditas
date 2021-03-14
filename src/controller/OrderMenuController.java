@@ -12,7 +12,7 @@ import utils.U;
 import utils.uv;
 
 public class OrderMenuController implements IOrderMenuController {
-	ProductRepository rp = ProductRepository.instance();
+	RepositoryProducts rp = RepositoryProducts.instance();
 	
 	public boolean addProduct(Chart c) {
 		// TODO Auto-generated method stub

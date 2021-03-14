@@ -11,7 +11,7 @@ public class Generator {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ProductRepository rp=ProductRepository.instance();
+		RepositoryProducts rp=RepositoryProducts.instance();
 
 		int n=U.getInt("Inserte el número de productos que se van a generar");
 		

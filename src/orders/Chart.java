@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 import products.Product;
-import products.ProductRepository;
+import products.RepositoryProducts;
 import utils.U;
 
 @XmlRootElement(name="chart")

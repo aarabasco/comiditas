@@ -13,11 +13,11 @@ import interfaces.IProducto;
 @XmlSeeAlso({Food.class,Drink.class})
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Product implements IProducto,Serializable,Comparable {
-	private Integer id;
-	private static int count=0;
-	private String name;
-	private Double price;
-	private boolean forCeliac;
+	protected Integer id;
+	protected static int count=0;
+	protected String name;
+	protected Double price;
+	protected boolean forCeliac;
 	protected int sold;
 	
 	public Product(){

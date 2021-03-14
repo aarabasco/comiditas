@@ -6,7 +6,7 @@ public class prueba1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ProductRepository rp=ProductRepository.instance();
+		RepositoryProducts rp=RepositoryProducts.instance();
 		/*
 		Product f1=new Food("Hamburguesa de Pollo", 0.0, false, false, new Integer[] {1,2});
 		Product f2=new Food("Hamburguesa de Ternera", 0.0, false, false, new Integer[] {3,4});

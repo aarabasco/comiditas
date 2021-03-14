@@ -15,7 +15,7 @@ import utils.*;
 
 public class MainMenuController implements IMainMenuController{
 	static MainMenuController mmc=new MainMenuController();
-	static ProductRepository rp=ProductRepository.instance();
+	static RepositoryProducts rp=RepositoryProducts.instance();
 	static RepositoryOrders ro=RepositoryOrders.getInstance_O();
 	static RepositoryClients rc=RepositoryClients.getMiRepository();
 	static OrderMenuController omc=new OrderMenuController();
