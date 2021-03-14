@@ -150,7 +150,7 @@ public class MainMenuController implements IMainMenuController{
 							ArrayList<Order> o_all=ro.getAllOrder();
 							o=uv.chooseOrder(o_all);
 							LocalDate ld= o.getDatetime();
-							mmc.changeOrder(ld);
+							mmc.changeOrder(o);
 							U.p("\n Se ha eliminado correctamente la orden.");
 							break;
 						
