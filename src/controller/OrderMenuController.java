@@ -1,7 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
-
+import product_generator.Generator;
 import interfaces.IOrderMenuController;
 import orders.Chart;
 import clients.Client;
@@ -19,26 +19,58 @@ public class OrderMenuController implements IOrderMenuController {
 		boolean result = false;
 		
 		Product p = null;
-		int cantidad = -1;
-		boolean encontrado = false;
-		while (!encontrado) {
-			String nombre = uv.search();
-			ArrayList<Product> plist = (ArrayList)rp.searchProducts(nombre);
-			p = uv.chooseProduct(plist);
-			if (p != null) {
-				encontrado = true;
+		if(rp.getAllProducts()!=null&&rp.getAllProducts().size()>0) {
+			int cantidad = -1;
+			boolean encontrado = false;
+			while (!encontrado) {
+				int option=U.getInt("\nPulse 1 para buscar un producto, 2 para listarlos todos y seleccionarlo");
+				while(option<1||option>2) {
+					option=U.getInt("\nInserte una opción válida.");
+				}
+				
+				if(option==1) {
+					String nombre = uv.search();
+					ArrayList<Product> plist = (ArrayList)rp.searchProducts(nombre);
+					p = uv.chooseProduct(plist);
+					if (p != null) {
+						U.p("\nHa añadido el siguiente producto al carrito:\n"+
+							p.toString());
+						encontrado = true;
+					}
+					else {
+						U.P("\nNo se ha encontrado el producto. Inténtelo de nuevo.");
+					}
+				}
+				else {
+					p = uv.chooseProduct((ArrayList<Product>) rp.getAllProducts());
+					if (p != null) {
+						U.p("\nHa añadido el siguiente producto al carrito:\n"+
+							p.toString());
+						encontrado = true;
+					}
+					else {
+						U.P("\nNo se ha encontrado el producto. Inténtelo de nuevo.");
+					}
+				}
+				
 			}
-			else {
-				U.P("\nNo se ha encontrado el producto. Inténtelo de nuevo.");
+
+			while (cantidad < 1) {
+				cantidad = U.getInt("\nInserte cantidad a añadir");
 			}
-		}
 
-		while (cantidad < 1) {
-			cantidad = U.getInt("\nInserte cantidad a añadir");
+			c.addProducttoChart(p, cantidad);
+			result = true;
 		}
-
-		c.addProducttoChart(p, cantidad);
-		result = true;
+		else {
+			U.p("No hay productos que añadir. Debes crear al menos uno:");
+			Generator g=new Generator();
+			int n=U.getInt("¿Cuantos productos deseas generar?");
+			while(n>0) {
+				g.generate();
+			}
+			
+		}
 		return result;
 	}
 
@@ -48,14 +80,15 @@ public class OrderMenuController implements IOrderMenuController {
 		boolean  continuar=true;
 		int option=-1;
 		
-		while(chart!=null&&chart.getLane().size()>0&&continuar) {
-			U.P("\nInserte la línea que desea editar de las siguientes en su carrito:\n"+
-					chart.toString());
-			
-			int lane=U.getInt()-1;
+		while(chart!=null&&chart.getLane().size()>0&&continuar) {			
+			int lane=U.getInt("\nInserte la línea que desea editar de las siguientes en su carrito:\n"+
+					chart.toString())-1;
 			while(lane<0||lane>chart.getLane().size()-1) {
 				lane=U.getInt("\nInserte una opción válida")-1;
 			}
+			
+			U.P("\nEstá modificando el siguiente producto:\n"+
+				chart.getLane().get(lane).toString()+"\n");
 			
 			int cantidad=U.getInt("\nInserte la cantidad que desea comprar de ese producto");
 			
@@ -116,6 +149,9 @@ public class OrderMenuController implements IOrderMenuController {
 					while(lane<0||lane>chart.getLane().size()-1) {
 						lane=U.getInt("\nInserte una línea válida")-1;
 					}
+					
+					U.P("\nVa a eliminar el siguiente producto:\n"+
+							chart.getLane().get(lane).toString()+"\n");
 					int option=U.getInt("¿Seguro que desea eliminar la línea?\n"+
 										"Inserte 1 para eliminar, 0 para cancelar");
 					while(option<0||option>1) {

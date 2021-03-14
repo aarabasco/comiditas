@@ -34,7 +34,6 @@ public class MainMenuController implements IMainMenuController{
 		
 		ro.loadFile();
 		rc.loadFile();
-		System.out.println(rp.getAllProducts());
 		U.P("¡Bienvenido a la aplicación de Muslitos_Picantes!\n");
 			int option=-1;
 		do {
@@ -359,41 +358,50 @@ public class MainMenuController implements IMainMenuController{
 		else {
 			boolean encontrado=false;
 			while(!encontrado) {
-				int option=U.getInt("\n1. Buscar por dni.\n"+
+				int option=U.getInt("\n0. Cancelar búsqueda.\n"+
+						 			"1. Buscar por dni.\n"+
 									"2. Buscar por nombre.\n"+
 									"3. Listar todos los clientes.");
-				while(option<1||option>3) {
+				while(option<0||option>3) {
 				option=U.getInt("\n¿Inserte una opción válida.");	
 				}
 				
-				switch(option) {
-				case 1:
-					U.P("\nEstás buscando por dni.");
-					String dni=uv.search(); //
-					ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
-					c=uv.chooseClient(dnilist);
-					break;
-				
-				case 2:
-					U.P("\nEstás buscando por nombre.");
-					String nombre=uv.search();
-					ArrayList<Client> namelist= rc.searchClientsByName(nombre);
-					c=uv.chooseClient(namelist);
-					break;
+				if(option!=0) {
+					switch(option) {
+					case 1:
+						U.P("\nEstás buscando por dni.");
+						String dni=uv.search(); //
+						ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
+						c=uv.chooseClient(dnilist);
+						break;
 					
-				default:
-					ArrayList<Client> alllist= rc.getAllClients();
-					c=uv.chooseClient(alllist);
-					break;
-				}
+					case 2:
+						U.P("\nEstás buscando por nombre.");
+						String nombre=uv.search();
+						ArrayList<Client> namelist= rc.searchClientsByName(nombre);
+						c=uv.chooseClient(namelist);
+						break;
+						
+					default:
+						ArrayList<Client> alllist= rc.getAllClients();
+						c=uv.chooseClient(alllist);
+						break;
+					}
 
-				if(c!=null) {
-					encontrado=true;
+					if(c!=null) {
+						encontrado=true;
+					}
+					else {
+						U.P("\nNo se ha encontrado el cliente. Inténtelo de nuevo.");
+					}
 				}
 				else {
-					U.P("\nNo se ha encontrado el cliente. Inténtelo de nuevo.");
+					c=null;
+					U.p("\nSe ha cancelado la búsqeda");
+					encontrado=true;
 				}
 			}
+			
 		}
 		
 		//ORDER MENU CONTROLLER...
@@ -401,9 +409,13 @@ public class MainMenuController implements IMainMenuController{
 		boolean completed = false;
 		boolean result=false;
 		do {
-			U.P(chart.toString());
-			option=uv.ChooseOrderMenu();
-		
+			if(c!=null) {
+				U.P(chart.toString());
+				option=uv.ChooseOrderMenu();
+			}
+			else {
+				option=0;
+			}
 			switch (option) {
 
 			case 0:
