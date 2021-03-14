@@ -53,191 +53,225 @@ public class MainMenuController implements IMainMenuController{
 			
 			case 2: //CHANGE ORDER MENU
 				
-				int option_Change_Order=U.getInt("\n¿Que desea hacer?\n"+
-					" 1. Buscar y modificar una orden por su cliente.\n"+
-					" 2. Buscar y modificar una orden por su fecha de encargo.\n"+
-					" Inserte una opción");
-				while(option_Change_Order<1||option>2) {
-					option_Change_Order=U.getInt("\n Inserte una opción válida");
-				}
-				
-				switch(option_Change_Order) {
-				case 1:
-					//aqui va changeOrder(Client c)
-					
-					
-					Client c=null;
-					boolean encontrado=false;
-					
-					while(!encontrado) {
-						int option_c=U.getInt("\n 1. Buscar por dni.\n"+
-											" 2. Buscar por nombre.\n"+
-											" 3. Listar todos los clientes.");
-						while(option_c<1||option_c>3) {
-						option=U.getInt("\n ¿Inserte una opción válida.");	
+				if(ro.getAllOrder()!=null&&ro.getAllOrder().size()>0) {
+					int option_Change_Order=U.getInt("\n¿Que desea hacer?\n"+
+							" 1. Buscar y modificar una orden por su cliente.\n"+
+							" 2. Buscar y modificar una orden por su fecha de encargo.\n"+
+							" 3. Mostrar todas las ordenes y seleccionar para modificar una.\n"+
+							" Inserte una opción");
+						while(option_Change_Order<1||option>3) {
+							option_Change_Order=U.getInt("\n Inserte una opción válida");
 						}
 						
-						switch(option_c) {
+						switch(option_Change_Order) {
 						case 1:
-							U.P("\n Estás buscando por dni.");
-							String dni=uv.search(); //
-							ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
-							c=uv.chooseClient(dnilist);
-							break;
-						
-						case 2:
-							U.P("\n Estás buscando por nombre.");
-							String nombre=uv.search();
-							ArrayList<Client> namelist= rc.searchClientsByName(nombre);
-							c=uv.chooseClient(namelist);
-							break;
+							//aqui va changeOrder(Client c)
 							
-						default:
-							ArrayList<Client> alllist= rc.getAllClients();
-							c=uv.chooseClient(alllist);
-							break;
-						}
+							
+							Client c=null;
+							boolean encontrado=false;
+							
+							while(!encontrado) {
+								int option_c=U.getInt("\n 1. Buscar por dni.\n"+
+													" 2. Buscar por nombre.\n"+
+													" 3. Listar todos los clientes.");
+								while(option_c<1||option_c>3) {
+								option=U.getInt("\n ¿Inserte una opción válida.");	
+								}
+								
+								switch(option_c) {
+								case 1:
+									U.P("\n Estás buscando por dni.");
+									String dni=uv.search(); //
+									ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
+									c=uv.chooseClient(dnilist);
+									break;
+								
+								case 2:
+									U.P("\n Estás buscando por nombre.");
+									String nombre=uv.search();
+									ArrayList<Client> namelist= rc.searchClientsByName(nombre);
+									c=uv.chooseClient(namelist);
+									break;
+									
+								default:
+									ArrayList<Client> alllist= rc.getAllClients();
+									c=uv.chooseClient(alllist);
+									break;
+								}
 
-						if(c!=null) {
-							encontrado=true;
+								if(c!=null) {
+									encontrado=true;
+								}
+								else {
+									U.P("\n No se ha encontrado el cliente. Inténtelo de nuevo.");
+								}
+						}
+						
+						if(c.getOrders()!=null&&c.getOrders().size()>0) {
+							mmc.changeOrder(c);
 						}
 						else {
-							U.P("\n No se ha encontrado el cliente. Inténtelo de nuevo.");
-						}
-				}
-				
-				if(c.getOrders()!=null&&c.getOrders().size()>0) {
-					mmc.changeOrder(c);
-				}
-				else {
-					U.P("\n Este cliente no tiene ordenes.");
-				}
-				
-				
-				break;
-					
-					
-				
-				case 2:
-					//aqui va changeOrder(LocalDateTime d)
-					
-					LocalDate d=null;
-					do {
-						int year=U.getInt(" Inserte el año (ej:2015)");
-						int month=U.getInt(" Inserte el mes(ej: 11)");
-						while(month<1||month>12) {
-							month=U.getInt(" Inserte el mes válido (del 01 al 12)");
-						}
-						int day=U.getInt(" Inserte el día para buscar (ej: 03)");
-						while(day<1||day>31) {
-							month=U.getInt(" Inserte un día válido (del 01 al 31)");
+							U.P("\n Este cliente no tiene ordenes.");
 						}
 						
-						d=LocalDate.of(year, month,day);
-						if(d==null) {
-							U.P("\n No se ha podido especificar su fecha. Indíquela de nuevo.");
+						
+						break;
+							
+							
+						
+						case 2:
+							//aqui va changeOrder(LocalDateTime d)
+							
+							LocalDate d=null;
+							do {
+								int year=U.getInt(" Inserte el año (ej:2015)");
+								int month=U.getInt(" Inserte el mes(ej: 11)");
+								while(month<1||month>12) {
+									month=U.getInt(" Inserte el mes válido (del 01 al 12)");
+								}
+								int day=U.getInt(" Inserte el día para buscar (ej: 03)");
+								while(day<1||day>31) {
+									month=U.getInt(" Inserte un día válido (del 01 al 31)");
+								}
+								
+								d=LocalDate.of(year, month,day);
+								if(d==null) {
+									U.P("\n No se ha podido especificar su fecha. Indíquela de nuevo.");
+								}
+							}while(d==null);
+							
+							mmc.changeOrder(d);
+							
+							break;
+							
+						case 3:
+							Order o= null;
+							ArrayList<Order> o_all=ro.getAllOrder();
+							o=uv.chooseOrder(o_all);
+							LocalDate ld= o.getDatetime();
+							mmc.changeOrder(ld);
+							U.p("\n Se ha eliminado correctamente la orden.");
+							break;
+						
 						}
-					}while(d==null);
-					
-					mmc.changeOrder(d);
-					
-					break;
-				
+						
+						
 				}
-				
+				else {
+					U.P("\n No hay ordenes que modificar.");
+				}
 				
 				break;
 			
 			case 3: //DELETE ORDER MENU
 				
-				int option_Delete_order=-1;
-				option_Delete_order=U.getInt("\n ¿Que desea hacer?\n"+
-					" 1. Buscar y eliminar una orden por su cliente.\n"+
-					" 2. Buscar y eliminar una orden por su fecha de encargo.\n"+
-					" Inserte una opción");
-				while(option_Delete_order<1||option_Delete_order>2) {
-					option_Delete_order=U.getInt("Inserte una opción válida");
-				}
-				
-				switch(option_Delete_order) {
-				case 1:
-					//aqui va deleteOrder(Client c)
-					Client c=null;
-						boolean encontrado=false;
-						
-						while(!encontrado) {
-							int option_c=U.getInt("\n 1. Buscar por dni.\n"+
-												" 2. Buscar por nombre.\n"+
-												" 3. Listar todos los clientes.");
-							while(option_c<1||option_c>3) {
-							option=U.getInt("\n ¿Inserte una opción válida.");	
-							}
+				if(ro.getAllOrder()!=null&&ro.getAllOrder().size()>0) {
+					int option_Delete_order=-1;
+					option_Delete_order=U.getInt("\n ¿Que desea hacer?\n"+
+						" 1. Buscar y eliminar una orden por su cliente.\n"+
+						" 2. Buscar y eliminar una orden por su fecha de encargo.\n"+
+						" 3. Mostrar todas las ordenes y seleccionar una para eliminarla.\n"+
+						" Inserte una opción");
+					while(option_Delete_order<1||option_Delete_order>3) {
+						option_Delete_order=U.getInt("Inserte una opción válida");
+					}
+					
+					switch(option_Delete_order) {
+					case 1:
+						//aqui va deleteOrder(Client c)
+						Client c=null;
+							boolean encontrado=false;
 							
-							switch(option_c) {
-							case 1:
-								U.P("\n Estás buscando por dni.");
-								String dni=uv.search(); //
-								ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
-								c=uv.chooseClient(dnilist);
-								break;
-							
-							case 2:
-								U.P("\n Estás buscando por nombre.");
-								String nombre=uv.search();
-								ArrayList<Client> namelist= rc.searchClientsByName(nombre);
-								c=uv.chooseClient(namelist);
-								break;
+							while(!encontrado) {
+								int option_c=U.getInt("\n 1. Buscar por dni.\n"+
+													" 2. Buscar por nombre.\n"+
+													" 3. Listar todos los clientes.");
+								while(option_c<1||option_c>3) {
+								option=U.getInt("\n ¿Inserte una opción válida.");	
+								}
 								
-							default:
-								ArrayList<Client> alllist= rc.getAllClients();
-								c=uv.chooseClient(alllist);
-								break;
-							}
+								switch(option_c) {
+								case 1:
+									U.P("\n Estás buscando por dni.");
+									String dni=uv.search(); //
+									ArrayList<Client> dnilist= rc.searchClientsDNI(dni);
+									c=uv.chooseClient(dnilist);
+									break;
+								
+								case 2:
+									U.P("\n Estás buscando por nombre.");
+									String nombre=uv.search();
+									ArrayList<Client> namelist= rc.searchClientsByName(nombre);
+									c=uv.chooseClient(namelist);
+									break;
+									
+								default:
+									ArrayList<Client> alllist= rc.getAllClients();
+									c=uv.chooseClient(alllist);
+									break;
+								}
 
-							if(c!=null) {
-								encontrado=true;
-							}
-							else {
-								U.P("\n No se ha encontrado el cliente. Inténtelo de nuevo.");
-							}
-					}
-					
-					if(c.getOrders()!=null&&c.getOrders().size()>0) {
-						mmc.deleteOrder(c);
-					}
-					else {
-						U.P("\n Este cliente no tiene ordenes.");
-					}
-					
-					
-					break;
-				
-				case 2:
-					
-					LocalDate d=null;
-					do {
-						int year=U.getInt("\n Inserte el año (ej:2015)");
-						int month=U.getInt("\n Inserte el mes(ej: 11)");
-						while(month<1||month>12) {
-							month=U.getInt("\n Inserte el mes válido (del 01 al 12)");
-						}
-						int day=U.getInt("\n Inserte el día para buscar (ej: 03)");
-						while(day<1||day>31) {
-							month=U.getInt("\n Inserte un día válido (del 01 al 31)");
+								if(c!=null) {
+									encontrado=true;
+								}
+								else {
+									U.P("\n No se ha encontrado el cliente. Inténtelo de nuevo.");
+								}
 						}
 						
-						d=LocalDate.of(year, month,day);
-						if(d==null) {
-							U.P("\n No se ha podido especificar su fecha. Indíquela de nuevo.");
+						if(c.getOrders()!=null&&c.getOrders().size()>0) {
+							mmc.deleteOrder(c);
 						}
-					}while(d==null);
+						else {
+							U.P("\n Este cliente no tiene ordenes.");
+						}
+						
+						
+						break;
 					
-					mmc.deleteOrder(d);
+					case 2:
+						
+						LocalDate d=null;
+						do {
+							int year=U.getInt("\n Inserte el año (ej:2015)");
+							int month=U.getInt("\n Inserte el mes(ej: 11)");
+							while(month<1||month>12) {
+								month=U.getInt("\n Inserte el mes válido (del 01 al 12)");
+							}
+							int day=U.getInt("\n Inserte el día para buscar (ej: 03)");
+							while(day<1||day>31) {
+								month=U.getInt("\n Inserte un día válido (del 01 al 31)");
+							}
+							
+							d=LocalDate.of(year, month,day);
+							if(d==null) {
+								U.P("\n No se ha podido especificar su fecha. Indíquela de nuevo.");
+							}
+						}while(d==null);
+						
+						mmc.deleteOrder(d);
+						
+						break;
+						
+					case 3:
+						Order o= null;
+						ArrayList<Order> o_all=ro.getAllOrder();
+						o=uv.chooseOrder(o_all);
+						ro.getAllOrder().remove(o);
+						ro.saveFile();
+						rc.saveFile();
+						rp.saveFile();
+						U.p("\n Se ha eliminado correctamente la orden.");
+						break;
+						
+						
 					
-					break;
-				
+					}
 				}
-				
+				else {
+					U.P("\n No hay órdenes que eliminar.");
+				}
 				break;
 			
 				
@@ -636,7 +670,6 @@ public class MainMenuController implements IMainMenuController{
 				}
 			}while(!completed);		
 			
-			ro.getAllOrder().remove(order_to_change);
 			ro.saveFile();
 			rc.saveFile();
 			rp.saveFile();;
@@ -645,6 +678,72 @@ public class MainMenuController implements IMainMenuController{
 		
 	}
 
+	public void changeOrder(Order o) {
+		boolean completed=false;
+		
+		
+		if(o!=null) {
+			
+			do {
+				String payed="No.";
+				String delivered="No.";
+				if(o.isPayed()) {
+					payed="Si.";
+				}
+				if(o.isDelivered()) {
+					delivered="Si.";
+				}
+				
+				int option=U.getInt("\n¿Qué desea modificar?\n"+
+									" 1. Dirección de envio: "+o.getAdress()+".\n"+
+									" 2. Pagado: "+payed+"\n"+
+									" 2. Entregado: "+delivered+"\n");
+				while(option<1||option>3) {
+					option=U.getInt("\n Inserte una opción válida");
+				}
+				
+				switch(option) {
+				case 1:
+					o.setAdress(U.getString("\n Inserte la dirección de envío"));
+					break;
+				
+				case 2:
+					
+					if(!o.isPayed()) {
+						o.setPayed(true);
+					}else {
+						o.setPayed(false);
+					}
+					U.P("\n Se ha modificado correctamente el estado del pago de la orden.");
+					break;
+				
+				default:
+					if(!o.isDelivered()) {
+						o.setDelivered(true);
+					}else {
+						o.setDelivered(false);
+					}
+					U.P("\n Se ha modificado correctamente el estado de entrega de la orden.");
+					break;
+				}
+				
+				option=U.getInt(" ¿Desea continuar? 1 Si, 2 No");
+				while(option<1||option>2) {
+					option=U.getInt("\n Inserte una opción válida");
+				}
+				if(option==2) {
+					completed=true;
+					U.P(" Su orden ha sido modificada\n"+
+						o.toString());
+				}
+			}while(!completed);		
+			
+			ro.saveFile();
+			rc.saveFile();
+			rp.saveFile();
+		}
+	}
+	
 	public void changeOrder(LocalDate d) {
 		// TODO Auto-generated method stub
 		boolean completed=false;
@@ -710,7 +809,6 @@ public class MainMenuController implements IMainMenuController{
 				}
 			}while(!completed);		
 			
-			ro.getAllOrder().remove(order_to_change);
 			ro.saveFile();
 			rc.saveFile();
 			rp.saveFile();
