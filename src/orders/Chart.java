@@ -19,7 +19,6 @@ public class Chart implements Serializable{
 	private ArrayList<Product> lane;
 	private ArrayList<Integer> cant;
 	double total;
-	double finalprice;
 
 	public Chart() {
 		super();
@@ -38,22 +37,13 @@ public class Chart implements Serializable{
 	public ArrayList<Integer> getCant() {
 		return cant;
 	}
+	
+	public void setCant(ArrayList<Integer> cant) {
+		this.cant = cant;
+	}
 
 	public double getTotal() {
 		return total;
-	}
-
-	public void updatePrice() {
-		
-		double result = 0;
-
-		for (int i = 0; i < lane.size(); i++) {
-			result += lane.get(i).getPrice() * cant.get(i);
-		}
-
-		this.total = result;
-		
-		
 	}
 
 	public void addProducttoChart(Product p, int cantidad) {
@@ -109,19 +99,16 @@ public class Chart implements Serializable{
 		this.total=total;
 	}
 
-	public boolean comprobeDiscount() {
-		boolean result=false;
+	public void updatePrice() {
 		
-		for(Product p:lane) {
-			for(int j=0;j<p.getBundlePack().length;j++) {
-				for(int i=0;i<lane.size();i++) {
-					if(lane.get(i).getId()==p.getBundlePack()[j]) {
-						System.out.println("entro?");return true;
-					}
-				}
-			}
+		double result = 0;
+
+		for (int i = 0; i < lane.size(); i++) {
+			result += lane.get(i).getPrice() * cant.get(i);
 		}
+
+		this.total = result;
 		
-		return result;
+		
 	}
 }

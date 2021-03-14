@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RepositoryOrders implements Serializable{
 
-	ArrayList<Order> orders;
+	private ArrayList<Order> orders;
 	
 	//private static variable
 	private static RepositoryOrders instanceO;
@@ -40,10 +40,6 @@ public class RepositoryOrders implements Serializable{
 	private RepositoryOrders() {
 		super();
 		this.orders = new ArrayList<Order>();
-	}
-
-	public ArrayList<Order> getOrders() {
-		return orders;
 	}
 
 	public void setOrders(ArrayList<Order> orders) {
@@ -208,18 +204,4 @@ public class RepositoryOrders implements Serializable{
 		}
 	}
 	
-	public void saveFileXML() {
-		JAXBContext JAXC;
-		try {
-			JAXC=JAXBContext.newInstance(RepositoryOrders.class);
-			Marshaller JMAR = JAXC.createMarshaller();
-			JMAR.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			JMAR.marshal(instanceO, new File("orders.xml"));
-			
-			
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }

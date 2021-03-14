@@ -37,7 +37,7 @@ public class Order implements Serializable{
 	/**
 	 * 
 	 * @param cliente
-	 * @param productos2 
+	 * @param productos 
 	 * @param productos
 	 * @param total
 	 * @param datetime
@@ -45,7 +45,7 @@ public class Order implements Serializable{
 	 * @param delivered
 	 * @param payed
 	 */
-	public Order(Client cliente, ArrayList<Product> productos2, double total, LocalDate datetime, String adress, Chart chart, boolean delivered,
+	public Order(Client cliente, ArrayList<Product> productos, double total, LocalDate datetime, String adress, Chart chart, boolean delivered,
 			boolean payed) {
 		super();
 		RepositoryOrders ro=RepositoryOrders.getInstance_O();
@@ -74,10 +74,6 @@ public class Order implements Serializable{
 
 	public Client getCliente() {
 		return cliente;
-	}
-
-	public void setCliente(Client cliente) {
-		this.cliente = cliente;
 	}
 
 	public List<Product> getProductos() {
