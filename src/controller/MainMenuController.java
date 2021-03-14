@@ -444,7 +444,9 @@ public class MainMenuController implements IMainMenuController{
 		}
 		
 		//ORDER MENU CONTROLLER...
-		a=c.getAddress();
+		if(c!=null&&a!=null) {
+			a=c.getAddress();
+		}
 		int option=-1;
 		boolean completed = false;
 		boolean result=false;
