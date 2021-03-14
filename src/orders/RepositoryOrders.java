@@ -200,7 +200,7 @@ public class RepositoryOrders implements Serializable{
 			orders=(ArrayList<Order>)oi.readObject();
 			oi.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("No hay ordenes que cargar.");
+			System.out.println("\nNo se ha cargado ningúna orden. No hay ordenes que cargar.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

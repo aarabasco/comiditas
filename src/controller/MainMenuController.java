@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,8 +23,14 @@ public class MainMenuController implements IMainMenuController{
 	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stu
+		File archivo = new File("products.xml");
+		if (!archivo.exists()) {
+		    U.P("No se ha cargado ningún producto. No hay productos que cargar.");
+		}
+		else {
+			rp.loadFile();
+		}
 		
-		rp.loadFile();
 		ro.loadFile();
 		rc.loadFile();
 		System.out.println(rp.getAllProducts());

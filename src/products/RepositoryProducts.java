@@ -226,8 +226,4 @@ public class RepositoryProducts {
 			e.printStackTrace();
 		}
 	}
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
