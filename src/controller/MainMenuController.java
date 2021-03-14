@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.List;
 
 import interfaces.IMainMenuController;
 import clients.*;
@@ -240,22 +241,98 @@ public class MainMenuController implements IMainMenuController{
 				
 				break;
 			
-			case 4: //CASH MENU
-				mmc.cashTotal();
-				break;
 				
-			case 5: //VIEW ALL ORDERS
-				mmc.viewAllOrders();
+			case 4://DATABASEMENU
+				int dbo=U.getInt("\nSe mostrará información detallada de lo que indiques.\n"+
+								 "1. Mostrar todo lo recaudado.\n"+
+								 "2. Mostrar el dinero recaudado hoy.\n"+
+								 "3. Mostrar el dinero recaudado este mes.\n"+
+								 "4. Mostrar todas las ordenes.\n"+
+								 "5. Mostrar todas las ordenes no pagadas.\n"+
+								 "6. Mostrar todas las ordenes no entregadas.\n"+
+								 "7. Mostrar todos los clientes.\n"+
+								 "8. Mostrar todos los productos.\n"+
+								 "9. Mostrar todas las bebidas.\n"+
+								 "10. Mostrar todas las comidas.\n");
+				while(dbo<1||dbo>10) {
+					dbo=U.getInt("\nInserte una opción válida");
+				}
+				
+				switch(dbo) {
+				case 1:
+					mmc.cashTotal();
+					break;
+				
+				case 2:
+					mmc.cashToday();
+					break;
+					
+				case 3:
+					mmc.cashThisMonth();
+					break;
+					
+				case 4:
+					mmc.viewAllOrders();
+					break;
+					
+				case 5:
+					mmc.viewOrdersNotPayed();
+					break;
+					
+				case 6:
+					mmc.viewOrdersPendingDelevered();
+					break;
+					
+				case 7: //ver todos los clientes
+					ArrayList<Client> call=rc.getAllClients();
+					if(call!=null&&call.size()>0) {
+						for(Client c:call) {
+							U.P(c.toString());
+						}
+					}
+					else {
+						U.p("\nNo hay clientes que mostrar.");
+					}
+					break;
+					
+				case 8: //ver todos los productos
+					List<Product> pall=rp.getAllProducts();
+					if(pall!=null&&pall.size()>0) {
+						for(Product p:pall) {
+							U.P(p.toString());
+						}
+					}
+					else {
+						U.p("\nNo hay productos que mostrar.");
+					}
+					break;
+					
+				case 9: //ver todas las bebidas
+					List<Product> dall=rp.getAllDrinks();
+					if(dall!=null&&dall.size()>0) {
+						for(Product d:dall) {
+							U.P(d.toString());
+						}
+					}
+					else {
+						U.p("\nNo hay bebidas que mostrar.");
+					}
+					break;
+					
+				case 10: //ver las comidas
+					List<Product> fall=rp.getAllFoods();
+					if(fall!=null&&fall.size()>0) {
+						for(Product d:fall) {
+							U.P(d.toString());
+						}
+					}
+					else {
+						U.p("\nNo hay comidas que mostrar.");
+					}
+					break;
+				}
+				break;
 			
-				break;
-				
-			case 6:
-				mmc.viewOrdersNotPayed();
-				break;
-				
-			default:
-				mmc.viewOrdersPendingDelevered();
-				break;
 			}
 			
 			

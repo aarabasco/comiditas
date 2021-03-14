@@ -82,11 +82,12 @@ public class Chart implements Serializable{
 
 	@Override
 	public String toString() {
-		String result = "";
+		String result = "----------Carrito----------\n";
 		for (int i = 0; i < cant.size(); i++) {
 			result += (i + 1) + ". " + lane.get(i).getName() + " --> " + "x " + cant.get(i) + ".\n";
 		}
-		result += "\nEl total es: " + this.getTotal() + ".";
+		result+="---------------------------";
+		result += "\nEl total es: " + String.format("%.1f", this.getTotal()) + ".";
 		return result;
 	}
 
