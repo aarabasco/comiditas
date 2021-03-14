@@ -23,7 +23,7 @@ public class MainMenuController implements IMainMenuController{
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stu
 		
-		rp.loadFile();
+		rp.loadFileB();
 		ro.loadFile();
 		rc.loadFile();
 		System.out.println(rp.getAllProducts());
@@ -414,11 +414,9 @@ public class MainMenuController implements IMainMenuController{
 					c.getOrders().add(o);
 					rc.saveFile();
 					U.P("\nSu orden es la siguiente: "+o);
-
-					rp.updateProductsInfo(chart);
 					
 					ro.saveFile();
-					rp.saveFile();
+					rp.saveFileB();
 					
 					//prueba sold increment:
 					System.out.println(chart.getLane().get(0).getSold());
@@ -506,7 +504,7 @@ public class MainMenuController implements IMainMenuController{
 			ro.getAllOrder().remove(order_to_change);
 			ro.saveFile();
 			rc.saveFile();
-			rp.saveFile();;
+			rp.saveFileB();;
 		}
 		
 		
@@ -580,7 +578,7 @@ public class MainMenuController implements IMainMenuController{
 			ro.getAllOrder().remove(order_to_change);
 			ro.saveFile();
 			rc.saveFile();
-			rp.saveFile();
+			rp.saveFileB();
 		}
 	}
 	
@@ -627,7 +625,7 @@ public class MainMenuController implements IMainMenuController{
 				U.p("\nSe ha elminado correctamente su orden\n.");
 				ro.saveFile();
 				rc.saveFile();
-				rp.saveFile();
+				rp.saveFileB();
 			}
 		}
 		else {

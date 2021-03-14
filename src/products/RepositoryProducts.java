@@ -11,12 +11,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import orders.Chart;
+import orders.Order;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -223,6 +226,40 @@ public class RepositoryProducts {
 			}
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveFileB(){
+
+		try {
+			FileOutputStream fo=new FileOutputStream(new File("Product.dat"));
+			ObjectOutputStream oo=new ObjectOutputStream(fo);
+			oo.writeObject(products);
+			oo.flush();
+			oo.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("No se ha encontrado Order.dat");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public void loadFileB(){
+
+		try {
+			FileInputStream fi=new FileInputStream("Product.dat");
+			ObjectInputStream oi=new ObjectInputStream(fi);
+
+			products=(List<Product>)oi.readObject();
+			oi.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("No hay ordenes que cargar.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
